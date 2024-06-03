@@ -1,20 +1,18 @@
 # Panoptic audit details
-- Total Prize Pool: $120,000 in USDC
-  - HM awards: $100,320 in USDC
-  - QA awards: $4,180 in USDC
-  - Judge awards: $9,000 USDC
-  - Lookout awards: $6,000 USDC
+- Total Prize Pool: $25000 in USDC
+  - HM awards: $21,500 in USDC
+  - Judge awards: $1,800 in USDC
+  - Validator awards: $1,200 in USDC 
   - Scout awards: $500 in USDC
- 
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/2024-04-panoptic/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2024-06-panoptic/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts April 1, 2024 20:00 UTC
-- Ends April 22, 2024 20:00 UTC
+- Starts June 4, 2024 20:00 UTC
+- Ends June 10, 2024 20:00 UTC
 
 ## Automated Findings / Publicly Known Issues
 
-The 4naly3er report can be found [here](https://github.com/code-423n4/2024-04-panoptic/blob/main/4naly3er-report.md).
+The 4naly3er report can be found @TODO: ~~[here](https://github.com/code-423n4/2024-04-panoptic/blob/main/4naly3er-report.md).~~
 
 
 
@@ -316,8 +314,8 @@ There is a factory owner but they do not have any permissions over the contracts
 ⚠️**Note**: You will need to provide your own Ethereum Mainnet eth_rpc_url (Works best with a local archives node) in the Foundry.toml.
 
 ```bash
-git clone --recurse-submodules https://github.com/code-423n4/2024-04-panoptic.git
-cd 2024-04-panoptic
+git clone --recurse-submodules https://github.com/code-423n4/2024-06-panoptic.git
+cd 2024-06-panoptic
 export FOUNDRY_PROFILE=ci_test  # (tests WILL fail without this because of a Foundry bug)
 forge build
 forge test
