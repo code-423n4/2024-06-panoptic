@@ -19,7 +19,7 @@ The 4naly3er report can be found @TODO: ~~[here](https://github.com/code-423n4/2
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
 
 
-
+- **Any issues that were disputed, acknowledged or part of the QA reports from the April audit are __out of scope__**
 - Transfers of ERC1155 SFPM tokens are very limited by design. It is expected that certain accounts will be unable to transfer or receive tokens. 
 Some tokens may not be transferable at all.
 - Construction helper functions (prefixed with add) in the TokenId library and other types do not perform extensive input validation. Passing invalid or nonsensical inputs into these functions or attempting to overwrite already filled slots may yield unexpected or invalid results. This is by design, so it is expected that users
@@ -226,6 +226,16 @@ Panoptic has been presented at conferences and was conceived with the first Pano
 | test/foundry/types/harnesses/TokenIdHarness.sol          |
 
 ## Scoping Q &amp; A
+
+
+- The diff should contain resolutions for all High/Medium issues [reported in the April audit](https://gist.github.com/dyedm1/49389c9e94754a5df213d410609eb3cd) EXCEPT for M-03, which we have acknowledged and opted not to fix. 
+
+- The post-diff version of the contracts (defined as the latest commit on main  in 2024-06-panoptic) should not contain or introduce any High or Medium severity issues **that were not previously reported in the April audit.**
+
+- There are three new contracts introduced by the diff: FactoryNFT.sol (inherited), MetadataStore.sol (inherited) and Pointer.sol (a library). NONE of the functionality in these contracts or the factory's NFT/ERC721 implementation/issuance is in scope. However, the contracts themselves must technically be included in the scope because of their usage in the core contracts, so issues involving any existing functionality being compromised due to the introduction of those contracts are valid.
+
+
+The diff should start after the commit https://github.com/code-423n4/2024-06-panoptic/commit/833312ebd600665b577fbd9c03ffa0daf250ed24 on the 2024-06-panoptic repo.
 
 ### General questions
 
