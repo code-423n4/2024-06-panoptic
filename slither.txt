@@ -1,0 +1,732 @@
+INFO:Detectors:
+CollateralTracker.withdraw(uint256,address,address) (contracts/CollateralTracker.sol#513-548) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(s_underlyingToken,address(s_panopticPool),receiver,assets) (contracts/CollateralTracker.sol#538-543)
+CollateralTracker.withdraw(uint256,address,address,TokenId[]) (contracts/CollateralTracker.sol#558-595) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(s_underlyingToken,address(s_panopticPool),receiver,assets) (contracts/CollateralTracker.sol#585-590)
+CollateralTracker.redeem(uint256,address,address) (contracts/CollateralTracker.sol#620-655) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(s_underlyingToken,address(s_panopticPool),receiver,assets) (contracts/CollateralTracker.sol#645-650)
+PanopticFactory.uniswapV3MintCallback(uint256,uint256,bytes) (contracts/PanopticFactory.sol#131-154) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(decoded.poolFeatures.token0,decoded.payer,msg.sender,amount0Owed) (contracts/PanopticFactory.sol#141-146)
+PanopticFactory.uniswapV3MintCallback(uint256,uint256,bytes) (contracts/PanopticFactory.sol#131-154) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(decoded.poolFeatures.token1,decoded.payer,msg.sender,amount1Owed) (contracts/PanopticFactory.sol#148-153)
+SemiFungiblePositionManager.uniswapV3MintCallback(uint256,uint256,bytes) (contracts/SemiFungiblePositionManager.sol#404-428) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(decoded.poolFeatures.token0,decoded.payer,msg.sender,amount0Owed) (contracts/SemiFungiblePositionManager.sol#415-420)
+SemiFungiblePositionManager.uniswapV3MintCallback(uint256,uint256,bytes) (contracts/SemiFungiblePositionManager.sol#404-428) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(decoded.poolFeatures.token1,decoded.payer,msg.sender,amount1Owed) (contracts/SemiFungiblePositionManager.sol#422-427)
+SemiFungiblePositionManager.uniswapV3SwapCallback(int256,int256,bytes) (contracts/SemiFungiblePositionManager.sol#437-459) uses arbitrary from in transferFrom: SafeTransferLib.safeTransferFrom(token,decoded.payer,msg.sender,amountToPay) (contracts/SemiFungiblePositionManager.sol#458)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#arbitrary-from-in-transferfrom
+INFO:Detectors:
+Multicall.multicall(bytes[]) (contracts/base/Multicall.sol#12-36) has delegatecall inside a loop in a payable function: (success,result) = address(this).delegatecall(data[i]) (contracts/base/Multicall.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#payable-functions-using-delegatecall-inside-a-loop
+INFO:Detectors:
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) has bitwise-xor operator ^ instead of the exponentiation operator **: 
+	 - inv = (3 * denominator) ^ 2 (contracts/libraries/Math.sol#414)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-exponentiation
+INFO:Detectors:
+PanopticFactory._mintFullRange(IUniswapV3Pool,address,address,uint24) (contracts/PanopticFactory.sol#315-391) performs a multiplication on the result of a division:
+	- tickLower = (Constants.MIN_V3POOL_TICK / tickSpacing) * tickSpacing (contracts/PanopticFactory.sol#372)
+FactoryNFT.generateSVGArt(uint256,uint256) (contracts/base/FactoryNFT.sol#124-147) performs a multiplication on the result of a division:
+	- svgOut = svgOut.replace(<!-- TEXT -->,metadata[bytes32(descriptions)][lastCharVal + 16 * (rarity / 8)].decompressedDataStr()).replace(<!-- ART -->,metadata[bytes32(art)][lastCharVal].decompressedDataStr()).replace(<!-- FILTER -->,metadata[bytes32(filters)][rarity].decompressedDataStr()) (contracts/base/FactoryNFT.sol#139-146)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0x48a170391f7dc42444e8fa2) >> 128 (contracts/libraries/Math.sol#173)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0x2216e584f5fa1ea926041bedfe98) >> 128 (contracts/libraries/Math.sol#171)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0x5d6af8dedb81196699c329225ee604) >> 128 (contracts/libraries/Math.sol#169)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0x9aa508b5b7a84e1c677de54f3e99bc9) >> 128 (contracts/libraries/Math.sol#167)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0x31be135f97d08fd981231505542fcfa6) >> 128 (contracts/libraries/Math.sol#165)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0x70d869a156d2a1b890bb3df62baf32f7) >> 128 (contracts/libraries/Math.sol#163)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xa9f746462d870fdf8a65dc1f90e061e5) >> 128 (contracts/libraries/Math.sol#161)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xd097f3bdfd2022b8845ad8f792aa5825) >> 128 (contracts/libraries/Math.sol#159)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xe7159475a2c29b7443b29c7fa6e889d9) >> 128 (contracts/libraries/Math.sol#157)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xf3392b0822b70005940c7a398e4b70f3) >> 128 (contracts/libraries/Math.sol#155)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xf987a7253ac413176f2b074cf7815e54) >> 128 (contracts/libraries/Math.sol#153)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xfcbe86c7900a88aedcffc83b479aa3a4) >> 128 (contracts/libraries/Math.sol#151)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xfe5dee046a99a2a811c461f1969c3053) >> 128 (contracts/libraries/Math.sol#149)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xff2ea16466c96a3843ec78b326b52861) >> 128 (contracts/libraries/Math.sol#147)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xff973b41fa98c081472e6896dfb254c0) >> 128 (contracts/libraries/Math.sol#145)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xffcb9843d60f6159c9db58835c926644) >> 128 (contracts/libraries/Math.sol#143)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xffe5caca7e10e4e61c3624eaa0941cd0) >> 128 (contracts/libraries/Math.sol#141)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xfff2e50f5f656932ef12357cf3c7fdcc) >> 128 (contracts/libraries/Math.sol#139)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) performs a multiplication on the result of a division:
+	- sqrtR = (sqrtR * 0xfff97272373d413259a46990580e213a) >> 128 (contracts/libraries/Math.sol#137)
+	- sqrtR = type()(uint256).max / sqrtR (contracts/libraries/Math.sol#176)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv = (3 * denominator) ^ 2 (contracts/libraries/Math.sol#414)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv *= 2 - denominator * inv (contracts/libraries/Math.sol#418)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv *= 2 - denominator * inv (contracts/libraries/Math.sol#419)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv *= 2 - denominator * inv (contracts/libraries/Math.sol#420)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv *= 2 - denominator * inv (contracts/libraries/Math.sol#421)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv *= 2 - denominator * inv (contracts/libraries/Math.sol#422)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (contracts/libraries/Math.sol#394)
+	- inv *= 2 - denominator * inv (contracts/libraries/Math.sol#423)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) performs a multiplication on the result of a division:
+	- prod0 = prod0 / twos (contracts/libraries/Math.sol#399)
+	- result = prod0 * inv (contracts/libraries/Math.sol#431)
+PanopticMath.getTicks(int24,int24,int24) (contracts/libraries/PanopticMath.sol#373-398) performs a multiplication on the result of a division:
+	- minTick = (Constants.MIN_V3POOL_TICK / tickSpacing) * tickSpacing (contracts/libraries/PanopticMath.sol#381)
+PanopticMath.getTicks(int24,int24,int24) (contracts/libraries/PanopticMath.sol#373-398) performs a multiplication on the result of a division:
+	- maxTick = (Constants.MAX_V3POOL_TICK / tickSpacing) * tickSpacing (contracts/libraries/PanopticMath.sol#382)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+INFO:Detectors:
+IERC20Partial (contracts/tokens/interfaces/IERC20Partial.sol#11-28) has incorrect ERC20 function interface:IERC20Partial.approve(address,uint256) (contracts/tokens/interfaces/IERC20Partial.sol#22)
+IERC20Partial (contracts/tokens/interfaces/IERC20Partial.sol#11-28) has incorrect ERC20 function interface:IERC20Partial.transfer(address,uint256) (contracts/tokens/interfaces/IERC20Partial.sol#27)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-erc20-interface
+INFO:Detectors:
+Reentrancy in PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819):
+	External calls:
+	- (premiaOwed,premiaByLeg,paidAmounts) = _burnAndHandleExercise(commitLongSettled,tickLimitLow,tickLimitHigh,tokenId,positionSize,owner) (contracts/PanopticPool.sol#806-813)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	State variables written after the call(s):
+	- _updatePositionDataBurn(owner,tokenId) (contracts/PanopticPool.sol#816)
+		- s_options[owner][tokenId][leg] = LeftRightUnsigned.wrap(0) (contracts/PanopticPool.sol#835)
+	PanopticPool.s_options (contracts/PanopticPool.sol#228-229) can be used in cross function reentrancies:
+	- PanopticPool._addUserOption(TokenId,uint64) (contracts/PanopticPool.sol#706-749)
+	- PanopticPool._getPremia(TokenId,uint128,address,bool,int24) (contracts/PanopticPool.sol#1471-1540)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+	- _updatePositionDataBurn(owner,tokenId) (contracts/PanopticPool.sol#816)
+		- s_positionBalance[owner][tokenId] = LeftRightUnsigned.wrap(0) (contracts/PanopticPool.sol#826)
+	PanopticPool.s_positionBalance (contracts/PanopticPool.sol#248-249) can be used in cross function reentrancies:
+	- PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819)
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.calculatePortfolioValue(address,int24,TokenId[]) (contracts/PanopticPool.sol#412-422)
+	- PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245)
+	- PanopticPool.optionPositionBalance(address,TokenId) (contracts/PanopticPool.sol#357-376)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+Reentrancy in SemiFungiblePositionManager._createLegInAMM(IUniswapV3Pool,TokenId,uint256,LiquidityChunk,bool) (contracts/SemiFungiblePositionManager.sol#955-1098):
+	External calls:
+	- collectedSingleLeg = _collectAndWritePositionData(liquidityChunk,univ3pool,currentLiquidity,positionKey,moved,isLong) (contracts/SemiFungiblePositionManager.sol#1080-1087)
+		- (receivedAmount0,receivedAmount1) = univ3pool.collect(msg.sender,liquidityChunk.tickLower(),liquidityChunk.tickUpper(),uint128(amountToCollect.rightSlot()),uint128(amountToCollect.leftSlot())) (contracts/SemiFungiblePositionManager.sol#1275-1281)
+	- moved = _mintLiquidity(liquidityChunk,univ3pool) (contracts/SemiFungiblePositionManager.sol#1060-1062)
+		- (amount0,amount1) = univ3pool.mint(address(this),liquidityChunk.tickLower(),liquidityChunk.tickUpper(),liquidityChunk.liquidity(),mintdata) (contracts/SemiFungiblePositionManager.sol#1194-1200)
+	- moved = _burnLiquidity(liquidityChunk,univ3pool) (contracts/SemiFungiblePositionManager.sol#1060-1062)
+		- (amount0,amount1) = univ3pool.burn(liquidityChunk.tickLower(),liquidityChunk.tickUpper(),liquidityChunk.liquidity()) (contracts/SemiFungiblePositionManager.sol#1221-1225)
+	State variables written after the call(s):
+	- s_accountFeesBase[positionKey] = _getFeesBase(univ3pool,updatedLiquidity,liquidityChunk,true) (contracts/SemiFungiblePositionManager.sol#1092-1097)
+	SemiFungiblePositionManager.s_accountFeesBase (contracts/SemiFungiblePositionManager.sol#297) can be used in cross function reentrancies:
+	- SemiFungiblePositionManager._collectAndWritePositionData(LiquidityChunk,IUniswapV3Pool,LeftRightUnsigned,bytes32,LeftRightSigned,uint256) (contracts/SemiFungiblePositionManager.sol#1246-1304)
+	- SemiFungiblePositionManager._createLegInAMM(IUniswapV3Pool,TokenId,uint256,LiquidityChunk,bool) (contracts/SemiFungiblePositionManager.sol#955-1098)
+	- SemiFungiblePositionManager.getAccountFeesBase(address,address,uint256,int24,int24) (contracts/SemiFungiblePositionManager.sol#1525-1538)
+	- SemiFungiblePositionManager.getAccountPremium(address,address,uint256,int24,int24,int24,uint256) (contracts/SemiFungiblePositionManager.sol#1440-1514)
+	- SemiFungiblePositionManager.registerTokenTransfer(address,address,TokenId,uint256) (contracts/SemiFungiblePositionManager.sol#595-653)
+Reentrancy in PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642):
+	External calls:
+	- poolUtilizations = _mintInSFPMAndUpdateCollateral(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#617-622)
+		- (collectedByLeg,totalSwapped) = SFPM.mintTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#657-658)
+		- utilization0 = s_collateralToken0.takeCommissionAddData(msg.sender,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot()) (contracts/PanopticPool.sol#683-688)
+		- utilization1 = s_collateralToken1.takeCommissionAddData(msg.sender,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot()) (contracts/PanopticPool.sol#689-694)
+	State variables written after the call(s):
+	- s_positionBalance[msg.sender][tokenId] = LeftRightUnsigned.wrap(0).toLeftSlot(poolUtilizations).toRightSlot(positionSize) (contracts/PanopticPool.sol#629-632)
+	PanopticPool.s_positionBalance (contracts/PanopticPool.sol#248-249) can be used in cross function reentrancies:
+	- PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819)
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.calculatePortfolioValue(address,int24,TokenId[]) (contracts/PanopticPool.sol#412-422)
+	- PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245)
+	- PanopticPool.optionPositionBalance(address,TokenId) (contracts/PanopticPool.sol#357-376)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+	- _addUserOption(tokenId,effectiveLiquidityLimitX32) (contracts/PanopticPool.sol#625)
+		- s_positionsHash[account] = newHash (contracts/PanopticPool.sol#1382)
+	PanopticPool.s_positionsHash (contracts/PanopticPool.sol#264) can be used in cross function reentrancies:
+	- PanopticPool._updatePositionsHash(address,TokenId,bool) (contracts/PanopticPool.sol#1371-1383)
+	- PanopticPool._validatePositionList(address,TokenId[],uint256) (contracts/PanopticPool.sol#1334-1361)
+	- PanopticPool.numberOfPositions(address) (contracts/PanopticPool.sol#1410-1412)
+Reentrancy in PanopticFactory.deployNewPool(address,address,uint24,uint96,uint256,uint256) (contracts/PanopticFactory.sol#171-244):
+	External calls:
+	- SFPM.initializeAMMPool(token0,token1,fee) (contracts/PanopticFactory.sol#189)
+	- collateralTracker0.startToken(true,token0,token1,fee,newPoolContract) (contracts/PanopticFactory.sol#213)
+	- collateralTracker1.startToken(false,token0,token1,fee,newPoolContract) (contracts/PanopticFactory.sol#214)
+	- newPoolContract.startPool(v3Pool,token0,token1,collateralTracker0,collateralTracker1) (contracts/PanopticFactory.sol#216)
+	State variables written after the call(s):
+	- s_getPanopticPool[v3Pool] = newPoolContract (contracts/PanopticFactory.sol#218)
+	PanopticFactory.s_getPanopticPool (contracts/PanopticFactory.sol#90) can be used in cross function reentrancies:
+	- PanopticFactory.deployNewPool(address,address,uint24,uint96,uint256,uint256) (contracts/PanopticFactory.sol#171-244)
+	- PanopticFactory.getPanopticPool(IUniswapV3Pool) (contracts/PanopticFactory.sol#400-402)
+Reentrancy in PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245):
+	External calls:
+	- s_collateralToken0.delegate(account,uint128(delegatedAmounts.rightSlot())) (contracts/PanopticPool.sol#1189)
+	- s_collateralToken1.delegate(account,uint128(delegatedAmounts.leftSlot())) (contracts/PanopticPool.sol#1190)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	State variables written after the call(s):
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128(uint256(Math.max((int256(grossPremiumLast.rightSlot() * totalLiquidityBefore) - int256(_premiumAccumulatorsByLeg[_leg][0] * positionLiquidity)) + int256(legPremia.rightSlot() * 2 ** 64),0)) / totalLiquidity)).toLeftSlot(uint128(uint256(Math.max((int256(grossPremiumLast.leftSlot() * totalLiquidityBefore) - int256(_premiumAccumulatorsByLeg[_leg][1] * positionLiquidity)) + int256(legPremia.leftSlot()) * 2 ** 64,0)) / totalLiquidity)) (contracts/PanopticPool.sol#1891-1929)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128(premiumAccumulatorsByLeg[_leg][0])).toLeftSlot(uint128(premiumAccumulatorsByLeg[_leg][1])) (contracts/PanopticPool.sol#1891-1929)
+	PanopticPool.s_grossPremiumLast (contracts/PanopticPool.sol#235) can be used in cross function reentrancies:
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._updateSettlementPostBurn(address,TokenId,LeftRightUnsigned[4],uint128,bool) (contracts/PanopticPool.sol#1797-1939)
+	- PanopticPool._updateSettlementPostMint(TokenId,LeftRightUnsigned[4],uint128) (contracts/PanopticPool.sol#1630-1710)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- s_options[owner][tokenId][leg] = LeftRightUnsigned.wrap(0) (contracts/PanopticPool.sol#835)
+	PanopticPool.s_options (contracts/PanopticPool.sol#228-229) can be used in cross function reentrancies:
+	- PanopticPool._addUserOption(TokenId,uint64) (contracts/PanopticPool.sol#706-749)
+	- PanopticPool._getPremia(TokenId,uint128,address,bool,int24) (contracts/PanopticPool.sol#1471-1540)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- s_positionBalance[owner][tokenId] = LeftRightUnsigned.wrap(0) (contracts/PanopticPool.sol#826)
+	PanopticPool.s_positionBalance (contracts/PanopticPool.sol#248-249) can be used in cross function reentrancies:
+	- PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819)
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.calculatePortfolioValue(address,int24,TokenId[]) (contracts/PanopticPool.sol#412-422)
+	- PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245)
+	- PanopticPool.optionPositionBalance(address,TokenId) (contracts/PanopticPool.sol#357-376)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- s_positionsHash[account] = newHash (contracts/PanopticPool.sol#1382)
+	PanopticPool.s_positionsHash (contracts/PanopticPool.sol#264) can be used in cross function reentrancies:
+	- PanopticPool._updatePositionsHash(address,TokenId,bool) (contracts/PanopticPool.sol#1371-1383)
+	- PanopticPool._validatePositionList(address,TokenId[],uint256) (contracts/PanopticPool.sol#1334-1361)
+	- PanopticPool.numberOfPositions(address) (contracts/PanopticPool.sol#1410-1412)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- s_settledTokens[chunkKey] = settledTokens (contracts/PanopticPool.sol#1933)
+	PanopticPool.s_settledTokens (contracts/PanopticPool.sol#241) can be used in cross function reentrancies:
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._updateSettlementPostBurn(address,TokenId,LeftRightUnsigned[4],uint128,bool) (contracts/PanopticPool.sol#1797-1939)
+	- PanopticPool._updateSettlementPostMint(TokenId,LeftRightUnsigned[4],uint128) (contracts/PanopticPool.sol#1630-1710)
+	- PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+Reentrancy in PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139):
+	External calls:
+	- s_collateralToken0.delegate(msg.sender,liquidatee,delegations.rightSlot()) (contracts/PanopticPool.sol#1040)
+	- s_collateralToken1.delegate(msg.sender,liquidatee,delegations.leftSlot()) (contracts/PanopticPool.sol#1041)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	State variables written after the call(s):
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128(uint256(Math.max((int256(grossPremiumLast.rightSlot() * totalLiquidityBefore) - int256(_premiumAccumulatorsByLeg[_leg][0] * positionLiquidity)) + int256(legPremia.rightSlot() * 2 ** 64),0)) / totalLiquidity)).toLeftSlot(uint128(uint256(Math.max((int256(grossPremiumLast.leftSlot() * totalLiquidityBefore) - int256(_premiumAccumulatorsByLeg[_leg][1] * positionLiquidity)) + int256(legPremia.leftSlot()) * 2 ** 64,0)) / totalLiquidity)) (contracts/PanopticPool.sol#1891-1929)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128(premiumAccumulatorsByLeg[_leg][0])).toLeftSlot(uint128(premiumAccumulatorsByLeg[_leg][1])) (contracts/PanopticPool.sol#1891-1929)
+	PanopticPool.s_grossPremiumLast (contracts/PanopticPool.sol#235) can be used in cross function reentrancies:
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._updateSettlementPostBurn(address,TokenId,LeftRightUnsigned[4],uint128,bool) (contracts/PanopticPool.sol#1797-1939)
+	- PanopticPool._updateSettlementPostMint(TokenId,LeftRightUnsigned[4],uint128) (contracts/PanopticPool.sol#1630-1710)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- s_options[owner][tokenId][leg] = LeftRightUnsigned.wrap(0) (contracts/PanopticPool.sol#835)
+	PanopticPool.s_options (contracts/PanopticPool.sol#228-229) can be used in cross function reentrancies:
+	- PanopticPool._addUserOption(TokenId,uint64) (contracts/PanopticPool.sol#706-749)
+	- PanopticPool._getPremia(TokenId,uint128,address,bool,int24) (contracts/PanopticPool.sol#1471-1540)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- s_positionBalance[owner][tokenId] = LeftRightUnsigned.wrap(0) (contracts/PanopticPool.sol#826)
+	PanopticPool.s_positionBalance (contracts/PanopticPool.sol#248-249) can be used in cross function reentrancies:
+	- PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819)
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642)
+	- PanopticPool._updatePositionDataBurn(address,TokenId) (contracts/PanopticPool.sol#824-843)
+	- PanopticPool.calculatePortfolioValue(address,int24,TokenId[]) (contracts/PanopticPool.sol#412-422)
+	- PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245)
+	- PanopticPool.optionPositionBalance(address,TokenId) (contracts/PanopticPool.sol#357-376)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- s_positionsHash[account] = newHash (contracts/PanopticPool.sol#1382)
+	PanopticPool.s_positionsHash (contracts/PanopticPool.sol#264) can be used in cross function reentrancies:
+	- PanopticPool._updatePositionsHash(address,TokenId,bool) (contracts/PanopticPool.sol#1371-1383)
+	- PanopticPool._validatePositionList(address,TokenId[],uint256) (contracts/PanopticPool.sol#1334-1361)
+	- PanopticPool.numberOfPositions(address) (contracts/PanopticPool.sol#1410-1412)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- s_settledTokens[chunkKey] = settledTokens (contracts/PanopticPool.sol#1933)
+	PanopticPool.s_settledTokens (contracts/PanopticPool.sol#241) can be used in cross function reentrancies:
+	- PanopticPool._calculateAccumulatedPremia(address,TokenId[],bool,bool,int24) (contracts/PanopticPool.sol#431-494)
+	- PanopticPool._updateSettlementPostBurn(address,TokenId,LeftRightUnsigned[4],uint128,bool) (contracts/PanopticPool.sol#1797-1939)
+	- PanopticPool._updateSettlementPostMint(TokenId,LeftRightUnsigned[4],uint128) (contracts/PanopticPool.sol#1630-1710)
+	- PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139)
+	- PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+SemiFungiblePositionManager.getAccountPremium(address,address,uint256,int24,int24,int24,uint256).acctPremia (contracts/SemiFungiblePositionManager.sol#1453) is a local variable never initialized
+SemiFungiblePositionManager._createLegInAMM(IUniswapV3Pool,TokenId,uint256,LiquidityChunk,bool).updatedLiquidity (contracts/SemiFungiblePositionManager.sol#983) is a local variable never initialized
+PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).longPremium (contracts/libraries/PanopticMath.sol#786) is a local variable never initialized
+CollateralTracker._getAccountMargin(address,int24,uint256[2][],int128).tokenRequired (contracts/CollateralTracker.sol#1174) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+INFO:Detectors:
+PanopticFactory._mintFullRange(IUniswapV3Pool,address,address,uint24) (contracts/PanopticFactory.sol#315-391) ignores return value by (currentSqrtPriceX96) = v3Pool.slot0() (contracts/PanopticFactory.sol#321)
+PanopticFactory._mintFullRange(IUniswapV3Pool,address,address,uint24) (contracts/PanopticFactory.sol#315-391) ignores return value by IUniswapV3Pool(v3Pool).mint(address(this),tickLower,tickUpper,fullRangeLiquidity,mintCallback) (contracts/PanopticFactory.sol#383-390)
+PanopticPool.startPool(IUniswapV3Pool,address,address,CollateralTracker,CollateralTracker) (contracts/PanopticPool.sol#283-319) ignores return value by (currentTick) = IUniswapV3Pool(_univ3pool).slot0() (contracts/PanopticPool.sol#296)
+PanopticPool.calculateAccumulatedFeesBatch(address,bool,TokenId[]) (contracts/PanopticPool.sol#385-404) ignores return value by (currentTick) = s_univ3pool.slot0() (contracts/PanopticPool.sol#391)
+PanopticPool.pokeMedian() (contracts/PanopticPool.sol#501-513) ignores return value by (observationIndex,observationCardinality) = s_univ3pool.slot0() (contracts/PanopticPool.sol#502)
+PanopticPool.pokeMedian() (contracts/PanopticPool.sol#501-513) ignores return value by (medianData) = PanopticMath.computeInternalMedian(observationIndex,observationCardinality,MEDIAN_PERIOD,s_miniMedian,s_univ3pool) (contracts/PanopticPool.sol#504-510)
+PanopticPool._validateSolvency(address,TokenId[],uint256) (contracts/PanopticPool.sol#852-911) ignores return value by (currentTick,observationIndex,observationCardinality) = _univ3pool.slot0() (contracts/PanopticPool.sol#861-869)
+PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139) ignores return value by (currentTick) = s_univ3pool.slot0() (contracts/PanopticPool.sol#1000)
+PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139) ignores return value by (None,finalTick,None,None,None,None,None) = s_univ3pool.slot0() (contracts/PanopticPool.sol#1062)
+PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245) ignores return value by (currentTick) = s_univ3pool.slot0() (contracts/PanopticPool.sol#1169)
+PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624) ignores return value by (currentTick) = s_univ3pool.slot0() (contracts/PanopticPool.sol#1563)
+PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624) ignores return value by s_collateralToken0.exercise(owner,0,0,0,- realizedPremia.rightSlot()) (contracts/PanopticPool.sol#1604)
+PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624) ignores return value by s_collateralToken1.exercise(owner,0,0,0,- realizedPremia.leftSlot()) (contracts/PanopticPool.sol#1605)
+SemiFungiblePositionManager._validateAndForwardToAMM(TokenId,uint128,int24,int24,bool) (contracts/SemiFungiblePositionManager.sol#679-728) ignores return value by (currentTick) = univ3pool.slot0() (contracts/SemiFungiblePositionManager.sol#724)
+SemiFungiblePositionManager.swapInAMM(IUniswapV3Pool,LeftRightSigned) (contracts/SemiFungiblePositionManager.sol#756-851) ignores return value by (sqrtPriceX96) = _univ3pool.slot0() (contracts/SemiFungiblePositionManager.sol#787)
+SemiFungiblePositionManager._getFeesBase(IUniswapV3Pool,uint128,LiquidityChunk,bool) (contracts/SemiFungiblePositionManager.sol#1132-1169) ignores return value by (feeGrowthInside0LastX128,feeGrowthInside1LastX128) = univ3pool.positions(keccak256(bytes)(abi.encodePacked(address(this),liquidityChunk.tickLower(),liquidityChunk.tickUpper()))) (contracts/SemiFungiblePositionManager.sol#1139-1148)
+FeesCalc._getAMMSwapFeesPerLiquidityCollected(IUniswapV3Pool,int24,int24,int24) (contracts/libraries/FeesCalc.sol#130-208) ignores return value by (lowerOut0,lowerOut1) = univ3pool.ticks(tickLower) (contracts/libraries/FeesCalc.sol#142)
+FeesCalc._getAMMSwapFeesPerLiquidityCollected(IUniswapV3Pool,int24,int24,int24) (contracts/libraries/FeesCalc.sol#130-208) ignores return value by (upperOut0,upperOut1) = univ3pool.ticks(tickUpper) (contracts/libraries/FeesCalc.sol#143)
+PanopticMath.computeMedianObservedPrice(IUniswapV3Pool,uint256,uint256,uint256,uint256) (contracts/libraries/PanopticMath.sol#160-192) ignores return value by (timestamps[i],tickCumulatives[i],None,None) = univ3pool.observations(uint256((int256(observationIndex) - int256(i * period)) + int256(observationCardinality)) % observationCardinality) (contracts/libraries/PanopticMath.sol#173-178)
+PanopticMath.computeInternalMedian(uint256,uint256,uint256,uint256,IUniswapV3Pool) (contracts/libraries/PanopticMath.sol#203-268) ignores return value by (timestamp_old,tickCumulative_old) = univ3pool.observations(uint256(int256(observationIndex) - int256(1) + int256(observationCardinality)) % observationCardinality) (contracts/libraries/PanopticMath.sol#221-225)
+PanopticMath.computeInternalMedian(uint256,uint256,uint256,uint256,IUniswapV3Pool) (contracts/libraries/PanopticMath.sol#203-268) ignores return value by (timestamp_last,tickCumulative_last) = univ3pool.observations(observationIndex) (contracts/libraries/PanopticMath.sol#227-228)
+PanopticMath.twapFilter(IUniswapV3Pool,uint32) (contracts/libraries/PanopticMath.sol#276-303) ignores return value by (tickCumulatives) = univ3pool.observe(secondsAgos) (contracts/libraries/PanopticMath.sol#288)
+PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)) (contracts/libraries/PanopticMath.sol#774-915) ignores return value by collateral0.exercise(_liquidatee,0,0,0,int128(haircut0)) (contracts/libraries/PanopticMath.sol#863)
+PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)) (contracts/libraries/PanopticMath.sol#774-915) ignores return value by collateral1.exercise(_liquidatee,0,0,0,int128(haircut1)) (contracts/libraries/PanopticMath.sol#864)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+INFO:Detectors:
+CollateralTracker.takeCommissionAddData(address,int128,int128,int128) (contracts/CollateralTracker.sol#1014-1052) should emit an event for: 
+	- s_poolAssets = uint128(uint256(updatedAssets)) (contracts/CollateralTracker.sol#1047) 
+	- s_inAMM = uint128(uint256(int256(uint256(s_inAMM)) + (shortAmount - longAmount))) (contracts/CollateralTracker.sol#1048) 
+CollateralTracker.exercise(address,int128,int128,int128,int128) (contracts/CollateralTracker.sol#1062-1098) should emit an event for: 
+	- s_poolAssets = uint128(uint256(updatedAssets + realizedPremium)) (contracts/CollateralTracker.sol#1093) 
+	- s_inAMM = uint128(uint256(int256(uint256(s_inAMM)) - (shortAmount - longAmount))) (contracts/CollateralTracker.sol#1094) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+INFO:Detectors:
+CollateralTracker.startToken(bool,address,address,uint24,PanopticPool).token0 (contracts/CollateralTracker.sol#212) lacks a zero-check on :
+		- s_univ3token0 = token0 (contracts/CollateralTracker.sol#239)
+		- s_underlyingToken = token0 (contracts/CollateralTracker.sol#230)
+CollateralTracker.startToken(bool,address,address,uint24,PanopticPool).token1 (contracts/CollateralTracker.sol#213) lacks a zero-check on :
+		- s_univ3token1 = token1 (contracts/CollateralTracker.sol#240)
+		- s_underlyingToken = token1 (contracts/CollateralTracker.sol#230)
+PanopticFactory.constructor(address,SemiFungiblePositionManager,IUniswapV3Factory,address,address,bytes32[],uint256[][],Pointer[][])._WETH9 (contracts/PanopticFactory.sol#106) lacks a zero-check on :
+		- WETH = _WETH9 (contracts/PanopticFactory.sol#115)
+PanopticFactory.constructor(address,SemiFungiblePositionManager,IUniswapV3Factory,address,address,bytes32[],uint256[][],Pointer[][])._poolReference (contracts/PanopticFactory.sol#109) lacks a zero-check on :
+		- POOL_REFERENCE = _poolReference (contracts/PanopticFactory.sol#118)
+PanopticFactory.constructor(address,SemiFungiblePositionManager,IUniswapV3Factory,address,address,bytes32[],uint256[][],Pointer[][])._collateralReference (contracts/PanopticFactory.sol#110) lacks a zero-check on :
+		- COLLATERAL_REFERENCE = _collateralReference (contracts/PanopticFactory.sol#119)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+Multicall.multicall(bytes[]) (contracts/base/Multicall.sol#12-36) has external calls inside a loop: (success,result) = address(this).delegatecall(data[i]) (contracts/base/Multicall.sol#15)
+PanopticMath.computeMedianObservedPrice(IUniswapV3Pool,uint256,uint256,uint256,uint256) (contracts/libraries/PanopticMath.sol#160-192) has external calls inside a loop: (timestamps[i],tickCumulatives[i],None,None) = univ3pool.observations(uint256((int256(observationIndex) - int256(i * period)) + int256(observationCardinality)) % observationCardinality) (contracts/libraries/PanopticMath.sol#173-178)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+INFO:Detectors:
+Reentrancy in PanopticPool._burnAndHandleExercise(bool,int24,int24,TokenId,uint128,address) (contracts/PanopticPool.sol#923-973):
+	External calls:
+	- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+	State variables written after the call(s):
+	- (realizedPremia,premiaByLeg) = _updateSettlementPostBurn(owner,tokenId,collectedByLeg,positionSize,commitLongSettled) (contracts/PanopticPool.sol#941-947)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128(uint256(Math.max((int256(grossPremiumLast.rightSlot() * totalLiquidityBefore) - int256(_premiumAccumulatorsByLeg[_leg][0] * positionLiquidity)) + int256(legPremia.rightSlot() * 2 ** 64),0)) / totalLiquidity)).toLeftSlot(uint128(uint256(Math.max((int256(grossPremiumLast.leftSlot() * totalLiquidityBefore) - int256(_premiumAccumulatorsByLeg[_leg][1] * positionLiquidity)) + int256(legPremia.leftSlot()) * 2 ** 64,0)) / totalLiquidity)) (contracts/PanopticPool.sol#1891-1929)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128(premiumAccumulatorsByLeg[_leg][0])).toLeftSlot(uint128(premiumAccumulatorsByLeg[_leg][1])) (contracts/PanopticPool.sol#1891-1929)
+	- (realizedPremia,premiaByLeg) = _updateSettlementPostBurn(owner,tokenId,collectedByLeg,positionSize,commitLongSettled) (contracts/PanopticPool.sol#941-947)
+		- s_settledTokens[chunkKey] = settledTokens (contracts/PanopticPool.sol#1933)
+Reentrancy in PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819):
+	External calls:
+	- (premiaOwed,premiaByLeg,paidAmounts) = _burnAndHandleExercise(commitLongSettled,tickLimitLow,tickLimitHigh,tokenId,positionSize,owner) (contracts/PanopticPool.sol#806-813)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	State variables written after the call(s):
+	- _updatePositionDataBurn(owner,tokenId) (contracts/PanopticPool.sol#816)
+		- s_positionsHash[account] = newHash (contracts/PanopticPool.sol#1382)
+Reentrancy in SemiFungiblePositionManager._collectAndWritePositionData(LiquidityChunk,IUniswapV3Pool,LeftRightUnsigned,bytes32,LeftRightSigned,uint256) (contracts/SemiFungiblePositionManager.sol#1246-1304):
+	External calls:
+	- (receivedAmount0,receivedAmount1) = univ3pool.collect(msg.sender,liquidityChunk.tickLower(),liquidityChunk.tickUpper(),uint128(amountToCollect.rightSlot()),uint128(amountToCollect.leftSlot())) (contracts/SemiFungiblePositionManager.sol#1275-1281)
+	State variables written after the call(s):
+	- _updateStoredPremia(positionKey,currentLiquidity,collectedChunk) (contracts/SemiFungiblePositionManager.sol#1302)
+		- (s_accountPremiumOwed[positionKey],s_accountPremiumGross[positionKey]) = LeftRightLibrary.addCapped(s_accountPremiumOwed[positionKey],deltaPremiumOwed,s_accountPremiumGross[positionKey],deltaPremiumGross) (contracts/SemiFungiblePositionManager.sol#1117-1123)
+	- _updateStoredPremia(positionKey,currentLiquidity,collectedChunk) (contracts/SemiFungiblePositionManager.sol#1302)
+		- (s_accountPremiumOwed[positionKey],s_accountPremiumGross[positionKey]) = LeftRightLibrary.addCapped(s_accountPremiumOwed[positionKey],deltaPremiumOwed,s_accountPremiumGross[positionKey],deltaPremiumGross) (contracts/SemiFungiblePositionManager.sol#1117-1123)
+Reentrancy in PanopticPool._mintInSFPMAndUpdateCollateral(TokenId,uint128,int24,int24) (contracts/PanopticPool.sol#651-665):
+	External calls:
+	- (collectedByLeg,totalSwapped) = SFPM.mintTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#657-658)
+	State variables written after the call(s):
+	- _updateSettlementPostMint(tokenId,collectedByLeg,positionSize) (contracts/PanopticPool.sol#660)
+		- s_grossPremiumLast[chunkKey] = LeftRightUnsigned.wrap(0).toRightSlot(uint128((grossCurrent[0] * positionLiquidity + grossPremiumLast.rightSlot() * totalLiquidityBefore) / (totalLiquidity))).toLeftSlot(uint128((grossCurrent[1] * positionLiquidity + grossPremiumLast.leftSlot() * totalLiquidityBefore) / (totalLiquidity))) (contracts/PanopticPool.sol#1689-1706)
+	- _updateSettlementPostMint(tokenId,collectedByLeg,positionSize) (contracts/PanopticPool.sol#660)
+		- s_settledTokens[chunkKey] = s_settledTokens[chunkKey].add(collectedByLeg[leg]) (contracts/PanopticPool.sol#1641)
+Reentrancy in PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642):
+	External calls:
+	- poolUtilizations = _mintInSFPMAndUpdateCollateral(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#617-622)
+		- (collectedByLeg,totalSwapped) = SFPM.mintTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#657-658)
+		- utilization0 = s_collateralToken0.takeCommissionAddData(msg.sender,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot()) (contracts/PanopticPool.sol#683-688)
+		- utilization1 = s_collateralToken1.takeCommissionAddData(msg.sender,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot()) (contracts/PanopticPool.sol#689-694)
+	State variables written after the call(s):
+	- s_miniMedian = medianData (contracts/PanopticPool.sol#639)
+	- _addUserOption(tokenId,effectiveLiquidityLimitX32) (contracts/PanopticPool.sol#625)
+		- s_options[msg.sender][tokenId][leg] = LeftRightUnsigned.wrap(0).toRightSlot(premiumAccumulator0).toLeftSlot(premiumAccumulator1) (contracts/PanopticPool.sol#729-732)
+Reentrancy in PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624):
+	External calls:
+	- s_collateralToken0.exercise(owner,0,0,0,- realizedPremia.rightSlot()) (contracts/PanopticPool.sol#1604)
+	- s_collateralToken1.exercise(owner,0,0,0,- realizedPremia.leftSlot()) (contracts/PanopticPool.sol#1605)
+	State variables written after the call(s):
+	- s_settledTokens[chunkKey] = s_settledTokens[chunkKey].add(LeftRightUnsigned.wrap(uint256(LeftRightSigned.unwrap(realizedPremia)))) (contracts/PanopticPool.sol#1615-1617)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+INFO:Detectors:
+Reentrancy in PanopticPool._burnOptions(bool,TokenId,address,int24,int24) (contracts/PanopticPool.sol#795-819):
+	External calls:
+	- (premiaOwed,premiaByLeg,paidAmounts) = _burnAndHandleExercise(commitLongSettled,tickLimitLow,tickLimitHigh,tokenId,positionSize,owner) (contracts/PanopticPool.sol#806-813)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	Event emitted after the call(s):
+	- OptionBurnt(owner,positionSize,tokenId,premiaOwed) (contracts/PanopticPool.sol#818)
+Reentrancy in PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24) (contracts/PanopticPool.sol#591-642):
+	External calls:
+	- poolUtilizations = _mintInSFPMAndUpdateCollateral(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#617-622)
+		- (collectedByLeg,totalSwapped) = SFPM.mintTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#657-658)
+		- utilization0 = s_collateralToken0.takeCommissionAddData(msg.sender,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot()) (contracts/PanopticPool.sol#683-688)
+		- utilization1 = s_collateralToken1.takeCommissionAddData(msg.sender,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot()) (contracts/PanopticPool.sol#689-694)
+	Event emitted after the call(s):
+	- OptionMinted(msg.sender,positionSize,tokenId,poolUtilizations) (contracts/PanopticPool.sol#641)
+Reentrancy in PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245):
+	External calls:
+	- s_collateralToken0.delegate(account,uint128(delegatedAmounts.rightSlot())) (contracts/PanopticPool.sol#1189)
+	- s_collateralToken1.delegate(account,uint128(delegatedAmounts.leftSlot())) (contracts/PanopticPool.sol#1190)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	Event emitted after the call(s):
+	- OptionBurnt(owner,positionSize,tokenId,premiaOwed) (contracts/PanopticPool.sol#818)
+		- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+Reentrancy in PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]) (contracts/PanopticPool.sol#1146-1245):
+	External calls:
+	- s_collateralToken0.delegate(account,uint128(delegatedAmounts.rightSlot())) (contracts/PanopticPool.sol#1189)
+	- s_collateralToken1.delegate(account,uint128(delegatedAmounts.leftSlot())) (contracts/PanopticPool.sol#1190)
+	- _burnAllOptionsFrom(account,MIN_SWAP_TICK,MAX_SWAP_TICK,COMMIT_LONG_SETTLED,touchedId) (contracts/PanopticPool.sol#1194)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	- s_collateralToken0.refund(account,msg.sender,refundAmounts.rightSlot() - delegatedAmounts.rightSlot()) (contracts/PanopticPool.sol#1219-1223)
+	- s_collateralToken1.refund(account,msg.sender,refundAmounts.leftSlot() - delegatedAmounts.leftSlot()) (contracts/PanopticPool.sol#1224-1228)
+	- s_collateralToken0.refund(account,uint128(delegatedAmounts.rightSlot())) (contracts/PanopticPool.sol#1232)
+	- s_collateralToken1.refund(account,uint128(delegatedAmounts.leftSlot())) (contracts/PanopticPool.sol#1233)
+	Event emitted after the call(s):
+	- ForcedExercised(msg.sender,account,touchedId[0],exerciseFees) (contracts/PanopticPool.sol#1244)
+Reentrancy in PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139):
+	External calls:
+	- s_collateralToken0.delegate(msg.sender,liquidatee,delegations.rightSlot()) (contracts/PanopticPool.sol#1040)
+	- s_collateralToken1.delegate(msg.sender,liquidatee,delegations.leftSlot()) (contracts/PanopticPool.sol#1041)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	Event emitted after the call(s):
+	- OptionBurnt(owner,positionSize,tokenId,premiaOwed) (contracts/PanopticPool.sol#818)
+		- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+Reentrancy in PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]) (contracts/PanopticPool.sol#985-1139):
+	External calls:
+	- s_collateralToken0.delegate(msg.sender,liquidatee,delegations.rightSlot()) (contracts/PanopticPool.sol#1040)
+	- s_collateralToken1.delegate(msg.sender,liquidatee,delegations.leftSlot()) (contracts/PanopticPool.sol#1041)
+	- (netExchanged,premiasByLeg) = _burnAllOptionsFrom(liquidatee,MIN_SWAP_TICK,MAX_SWAP_TICK,DONOT_COMMIT_LONG_SETTLED,positionIdList) (contracts/PanopticPool.sol#1054-1060)
+		- (collectedByLeg,totalSwapped) = SFPM.burnTokenizedPosition(tokenId,positionSize,tickLimitLow,tickLimitHigh) (contracts/PanopticPool.sol#938-939)
+		- paid0 = s_collateralToken0.exercise(owner,longAmounts.rightSlot(),shortAmounts.rightSlot(),totalSwapped.rightSlot(),realizedPremia.rightSlot()) (contracts/PanopticPool.sol#953-959)
+		- paid1 = s_collateralToken1.exercise(owner,longAmounts.leftSlot(),shortAmounts.leftSlot(),totalSwapped.leftSlot(),realizedPremia.leftSlot()) (contracts/PanopticPool.sol#964-970)
+	- (deltaBonus0,deltaBonus1) = PanopticMath.haircutPremia(_liquidatee,_positionIdList,premiasByLeg,collateralRemaining,s_collateralToken0,s_collateralToken1,Math.getSqrtRatioAtTick(_finalTick),s_settledTokens) (contracts/PanopticPool.sol#1090-1099)
+	- s_collateralToken0.revoke(msg.sender,liquidatee,uint256(int256(uint256(_delegations.rightSlot())) + liquidationBonus0)) (contracts/PanopticPool.sol#1109-1113)
+	- s_collateralToken1.revoke(msg.sender,liquidatee,uint256(int256(uint256(_delegations.leftSlot())) + liquidationBonus1)) (contracts/PanopticPool.sol#1114-1118)
+	Event emitted after the call(s):
+	- AccountLiquidated(msg.sender,liquidatee,bonusAmounts) (contracts/PanopticPool.sol#1138)
+Reentrancy in SemiFungiblePositionManager.mintTokenizedPosition(TokenId,uint128,int24,int24) (contracts/SemiFungiblePositionManager.sol#506-529):
+	External calls:
+	- _mint(msg.sender,TokenId.unwrap(tokenId),positionSize) (contracts/SemiFungiblePositionManager.sol#517)
+		- ERC1155Holder(to).onERC1155Received(msg.sender,address(0),id,amount,) != ERC1155Holder.onERC1155Received.selector (contracts/tokens/ERC1155Minimal.sol#224-225)
+	Event emitted after the call(s):
+	- TokenizedPositionMinted(msg.sender,tokenId,positionSize) (contracts/SemiFungiblePositionManager.sol#519)
+Reentrancy in PanopticPool.settleLongPremium(TokenId[],address,uint256) (contracts/PanopticPool.sol#1552-1624):
+	External calls:
+	- s_collateralToken0.exercise(owner,0,0,0,- realizedPremia.rightSlot()) (contracts/PanopticPool.sol#1604)
+	- s_collateralToken1.exercise(owner,0,0,0,- realizedPremia.leftSlot()) (contracts/PanopticPool.sol#1605)
+	Event emitted after the call(s):
+	- PremiumSettled(owner,tokenId,realizedPremia) (contracts/PanopticPool.sol#1619)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+PanopticPool.pokeMedian() (contracts/PanopticPool.sol#501-513) uses timestamp for comparisons
+	Dangerous comparisons:
+	- medianData != 0 (contracts/PanopticPool.sol#512)
+PanopticPool._validateSolvency(address,TokenId[],uint256) (contracts/PanopticPool.sol#852-911) uses timestamp for comparisons
+	Dangerous comparisons:
+	- Math.abs(int256(fastOracleTick) - slowOracleTick) > MAX_SLOW_FAST_DELTA (contracts/PanopticPool.sol#908)
+PanopticMath.computeInternalMedian(uint256,uint256,uint256,uint256,IUniswapV3Pool) (contracts/libraries/PanopticMath.sol#203-268) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= uint256(uint40(medianData >> 216)) + period (contracts/libraries/PanopticMath.sol#218)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Detectors:
+Multicall.multicall(bytes[]) (contracts/base/Multicall.sol#12-36) uses assembly
+	- INLINE ASM (contracts/base/Multicall.sol#25-27)
+Math.mulDiv(uint256,uint256,uint256) (contracts/libraries/Math.sol#340-433) uses assembly
+	- INLINE ASM (contracts/libraries/Math.sol#353-357)
+	- INLINE ASM (contracts/libraries/Math.sol#362-364)
+	- INLINE ASM (contracts/libraries/Math.sol#379-381)
+	- INLINE ASM (contracts/libraries/Math.sol#383-386)
+	- INLINE ASM (contracts/libraries/Math.sol#393-395)
+	- INLINE ASM (contracts/libraries/Math.sol#398-400)
+	- INLINE ASM (contracts/libraries/Math.sol#404-406)
+Math.mulDiv64(uint256,uint256) (contracts/libraries/Math.sol#458-515) uses assembly
+	- INLINE ASM (contracts/libraries/Math.sol#467-471)
+	- INLINE ASM (contracts/libraries/Math.sol#476-479)
+	- INLINE ASM (contracts/libraries/Math.sol#493-495)
+	- INLINE ASM (contracts/libraries/Math.sol#497-500)
+	- INLINE ASM (contracts/libraries/Math.sol#503-506)
+Math.mulDiv96(uint256,uint256) (contracts/libraries/Math.sol#521-578) uses assembly
+	- INLINE ASM (contracts/libraries/Math.sol#530-534)
+	- INLINE ASM (contracts/libraries/Math.sol#539-542)
+	- INLINE ASM (contracts/libraries/Math.sol#556-558)
+	- INLINE ASM (contracts/libraries/Math.sol#560-563)
+	- INLINE ASM (contracts/libraries/Math.sol#566-569)
+Math.mulDiv128(uint256,uint256) (contracts/libraries/Math.sol#598-655) uses assembly
+	- INLINE ASM (contracts/libraries/Math.sol#607-611)
+	- INLINE ASM (contracts/libraries/Math.sol#616-619)
+	- INLINE ASM (contracts/libraries/Math.sol#633-635)
+	- INLINE ASM (contracts/libraries/Math.sol#637-640)
+	- INLINE ASM (contracts/libraries/Math.sol#643-646)
+Math.mulDiv192(uint256,uint256) (contracts/libraries/Math.sol#675-732) uses assembly
+	- INLINE ASM (contracts/libraries/Math.sol#684-688)
+	- INLINE ASM (contracts/libraries/Math.sol#693-696)
+	- INLINE ASM (contracts/libraries/Math.sol#710-712)
+	- INLINE ASM (contracts/libraries/Math.sol#714-717)
+	- INLINE ASM (contracts/libraries/Math.sol#720-723)
+Math.unsafeDivRoundingUp(uint256,uint256) (contracts/libraries/Math.sol#738-742) uses assembly
+	- INLINE ASM (contracts/libraries/Math.sol#739-741)
+SafeTransferLib.safeTransferFrom(address,address,address,uint256) (contracts/libraries/SafeTransferLib.sol#21-46) uses assembly
+	- INLINE ASM (contracts/libraries/SafeTransferLib.sol#24-43)
+SafeTransferLib.safeTransfer(address,address,uint256) (contracts/libraries/SafeTransferLib.sol#52-76) uses assembly
+	- INLINE ASM (contracts/libraries/SafeTransferLib.sol#55-73)
+PointerLibrary.data(Pointer) (contracts/types/Pointer.sol#50-62) uses assembly
+	- INLINE ASM (contracts/types/Pointer.sol#57-59)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+INFO:Detectors:
+FactoryNFT.maxRarityLabelWidth(uint256) (contracts/base/FactoryNFT.sol#294-318) has a high cyclomatic complexity (12).
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) has a high cyclomatic complexity (24).
+TokenIdLibrary.validate(TokenId) (contracts/types/TokenId.sol#500-571) has a high cyclomatic complexity (14).
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#cyclomatic-complexity
+INFO:Detectors:
+LeftRightLibrary.add(LeftRightUnsigned,LeftRightSigned) (contracts/types/LeftRight.sol#193-207) is never used and should be removed
+LiquidityChunkLibrary.addLiquidity(LiquidityChunk,uint128) (contracts/types/LiquidityChunk.sol#89-96) is never used and should be removed
+Math.min24(int24,int24) (contracts/libraries/Math.sol#25-27) is never used and should be removed
+PanopticMath.convertCollateralData(LeftRightUnsigned,LeftRightUnsigned,uint256,int24) (contracts/libraries/PanopticMath.sol#480-488) is never used and should be removed
+PointerLibrary.createPointer(address,uint48,uint48) (contracts/types/Pointer.sol#17-24) is never used and should be removed
+SafeTransferLib.safeTransfer(address,address,uint256) (contracts/libraries/SafeTransferLib.sol#52-76) is never used and should be removed
+TokenIdLibrary.addAsset(TokenId,uint256,uint256) (contracts/types/TokenId.sol#205-214) is never used and should be removed
+TokenIdLibrary.addIsLong(TokenId,uint256,uint256) (contracts/types/TokenId.sol#240-248) is never used and should be removed
+TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24) (contracts/types/TokenId.sol#336-354) is never used and should be removed
+TokenIdLibrary.addOptionRatio(TokenId,uint256,uint256) (contracts/types/TokenId.sol#221-232) is never used and should be removed
+TokenIdLibrary.addPoolId(TokenId,uint64) (contracts/types/TokenId.sol#183-187) is never used and should be removed
+TokenIdLibrary.addRiskPartner(TokenId,uint256,uint256) (contracts/types/TokenId.sol#273-284) is never used and should be removed
+TokenIdLibrary.addStrike(TokenId,int24,uint256) (contracts/types/TokenId.sol#291-303) is never used and should be removed
+TokenIdLibrary.addTickSpacing(TokenId,int24) (contracts/types/TokenId.sol#193-197) is never used and should be removed
+TokenIdLibrary.addTokenType(TokenId,uint256,uint256) (contracts/types/TokenId.sol#255-266) is never used and should be removed
+TokenIdLibrary.addWidth(TokenId,int24,uint256) (contracts/types/TokenId.sol#310-323) is never used and should be removed
+TokenIdLibrary.clearLeg(TokenId,uint256) (contracts/types/TokenId.sol#464-491) is never used and should be removed
+TokenIdLibrary.countLongs(TokenId) (contracts/types/TokenId.sol#404-408) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code
+INFO:Detectors:
+Pragma version^0.8.0 (contracts/libraries/CallbackLib.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/Constants.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/Errors.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/FeesCalc.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/InteractionHelper.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/Math.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/PanopticMath.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/libraries/SafeTransferLib.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/tokens/ERC1155Minimal.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/tokens/ERC20Minimal.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/tokens/interfaces/IERC20Partial.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/types/LeftRight.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/types/LiquidityChunk.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/types/Pointer.sol#2) allows old versions
+Pragma version^0.8.0 (contracts/types/TokenId.sol#2) allows old versions
+solc-0.8.25 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+INFO:Detectors:
+Low level call in Multicall.multicall(bytes[]) (contracts/base/Multicall.sol#12-36):
+	- (success,result) = address(this).delegatecall(data[i]) (contracts/base/Multicall.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Detectors:
+Variable CollateralTracker.s_ITMSpreadFee (contracts/CollateralTracker.sol#120) is not in mixedCase
+Variable CollateralTracker.COMMISSION_FEE (contracts/CollateralTracker.sol#132) is not in mixedCase
+Variable CollateralTracker.SELLER_COLLATERAL_RATIO (contracts/CollateralTracker.sol#138) is not in mixedCase
+Variable CollateralTracker.BUYER_COLLATERAL_RATIO (contracts/CollateralTracker.sol#142) is not in mixedCase
+Variable CollateralTracker.FORCE_EXERCISE_COST (contracts/CollateralTracker.sol#147) is not in mixedCase
+Variable CollateralTracker.TARGET_POOL_UTIL (contracts/CollateralTracker.sol#152) is not in mixedCase
+Variable CollateralTracker.SATURATED_POOL_UTIL (contracts/CollateralTracker.sol#156) is not in mixedCase
+Variable CollateralTracker.ITM_SPREAD_MULTIPLIER (contracts/CollateralTracker.sol#160) is not in mixedCase
+Variable PanopticFactory.UNIV3_FACTORY (contracts/PanopticFactory.sol#60) is not in mixedCase
+Variable PanopticFactory.SFPM (contracts/PanopticFactory.sol#63) is not in mixedCase
+Variable PanopticFactory.POOL_REFERENCE (contracts/PanopticFactory.sol#66) is not in mixedCase
+Variable PanopticFactory.COLLATERAL_REFERENCE (contracts/PanopticFactory.sol#69) is not in mixedCase
+Variable PanopticFactory.WETH (contracts/PanopticFactory.sol#72) is not in mixedCase
+Parameter PanopticPool.startPool(IUniswapV3Pool,address,address,CollateralTracker,CollateralTracker)._univ3pool (contracts/PanopticPool.sol#284) is not in mixedCase
+Variable PanopticPool.SFPM (contracts/PanopticPool.sol#168) is not in mixedCase
+Variable SemiFungiblePositionManager.FACTORY (contracts/SemiFungiblePositionManager.sol#138) is not in mixedCase
+Variable SemiFungiblePositionManager.s_AddrToPoolIdData (contracts/SemiFungiblePositionManager.sol#146) is not in mixedCase
+Modifier SemiFungiblePositionManager.ReentrancyLock(uint64) (contracts/SemiFungiblePositionManager.sol#307-317) is not in mixedCase
+Parameter LiquidityChunkLibrary.createChunk(int24,int24,uint128)._tickLower (contracts/types/LiquidityChunk.sol#71) is not in mixedCase
+Parameter LiquidityChunkLibrary.createChunk(int24,int24,uint128)._tickUpper (contracts/types/LiquidityChunk.sol#72) is not in mixedCase
+Parameter LiquidityChunkLibrary.addTickLower(LiquidityChunk,int24)._tickLower (contracts/types/LiquidityChunk.sol#104) is not in mixedCase
+Parameter LiquidityChunkLibrary.addTickUpper(LiquidityChunk,int24)._tickUpper (contracts/types/LiquidityChunk.sol#120) is not in mixedCase
+Parameter LiquidityChunkLibrary.updateTickLower(LiquidityChunk,int24)._tickLower (contracts/types/LiquidityChunk.sol#137) is not in mixedCase
+Parameter LiquidityChunkLibrary.updateTickUpper(LiquidityChunk,int24)._tickUpper (contracts/types/LiquidityChunk.sol#153) is not in mixedCase
+Parameter PointerLibrary.createPointer(address,uint48,uint48)._location (contracts/types/Pointer.sol#18) is not in mixedCase
+Parameter PointerLibrary.createPointer(address,uint48,uint48)._start (contracts/types/Pointer.sol#19) is not in mixedCase
+Parameter PointerLibrary.createPointer(address,uint48,uint48)._size (contracts/types/Pointer.sol#20) is not in mixedCase
+Parameter TokenIdLibrary.addPoolId(TokenId,uint64)._poolId (contracts/types/TokenId.sol#183) is not in mixedCase
+Parameter TokenIdLibrary.addTickSpacing(TokenId,int24)._tickSpacing (contracts/types/TokenId.sol#193) is not in mixedCase
+Parameter TokenIdLibrary.addAsset(TokenId,uint256,uint256)._asset (contracts/types/TokenId.sol#207) is not in mixedCase
+Parameter TokenIdLibrary.addOptionRatio(TokenId,uint256,uint256)._optionRatio (contracts/types/TokenId.sol#223) is not in mixedCase
+Parameter TokenIdLibrary.addIsLong(TokenId,uint256,uint256)._isLong (contracts/types/TokenId.sol#242) is not in mixedCase
+Parameter TokenIdLibrary.addTokenType(TokenId,uint256,uint256)._tokenType (contracts/types/TokenId.sol#257) is not in mixedCase
+Parameter TokenIdLibrary.addRiskPartner(TokenId,uint256,uint256)._riskPartner (contracts/types/TokenId.sol#275) is not in mixedCase
+Parameter TokenIdLibrary.addStrike(TokenId,int24,uint256)._strike (contracts/types/TokenId.sol#293) is not in mixedCase
+Parameter TokenIdLibrary.addWidth(TokenId,int24,uint256)._width (contracts/types/TokenId.sol#312) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._optionRatio (contracts/types/TokenId.sol#339) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._asset (contracts/types/TokenId.sol#340) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._isLong (contracts/types/TokenId.sol#341) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._tokenType (contracts/types/TokenId.sol#342) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._riskPartner (contracts/types/TokenId.sol#343) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._strike (contracts/types/TokenId.sol#344) is not in mixedCase
+Parameter TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._width (contracts/types/TokenId.sol#345) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+INFO:Detectors:
+Redundant expression "required (contracts/CollateralTracker.sol#1357)" inCollateralTracker (contracts/CollateralTracker.sol#36-1656)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#redundant-statements
+INFO:Detectors:
+Variable CollateralTracker.COMMISSION_FEE (contracts/CollateralTracker.sol#132) is too similar to CollateralTracker.constructor(uint256,uint256,uint256,int256,uint256,uint256,uint256)._commissionFee (contracts/CollateralTracker.sol#185)
+Variable CollateralTracker.exerciseCost(int24,int24,TokenId,uint128,LeftRightSigned).currentValue0 (contracts/CollateralTracker.sol#710) is too similar to CollateralTracker.exerciseCost(int24,int24,TokenId,uint128,LeftRightSigned).currentValue1 (contracts/CollateralTracker.sol#711)
+Variable CollateralTracker.exerciseCost(int24,int24,TokenId,uint128,LeftRightSigned).oracleValue0 (contracts/CollateralTracker.sol#712) is too similar to CollateralTracker.exerciseCost(int24,int24,TokenId,uint128,LeftRightSigned).oracleValue1 (contracts/CollateralTracker.sol#713)
+Variable CollateralTracker._computeStrangle(TokenId,uint256,uint128,int24,uint128).poolUtilization0 (contracts/CollateralTracker.sol#1637) is too similar to CollateralTracker._computeStrangle(TokenId,uint256,uint128,int24,uint128).poolUtilization1 (contracts/CollateralTracker.sol#1638)
+Variable CollateralTracker.s_univ3token0 (contracts/CollateralTracker.sol#95) is too similar to CollateralTracker.s_univ3token1 (contracts/CollateralTracker.sol#98)
+Variable PanopticFactory.UNIV3_FACTORY (contracts/PanopticFactory.sol#60) is too similar to PanopticFactory.constructor(address,SemiFungiblePositionManager,IUniswapV3Factory,address,address,bytes32[],uint256[][],Pointer[][])._univ3Factory (contracts/PanopticFactory.sol#108)
+Variable PanopticFactory.COLLATERAL_REFERENCE (contracts/PanopticFactory.sol#69) is too similar to PanopticFactory.constructor(address,SemiFungiblePositionManager,IUniswapV3Factory,address,address,bytes32[],uint256[][],Pointer[][])._collateralReference (contracts/PanopticFactory.sol#110)
+Variable PanopticFactory.POOL_REFERENCE (contracts/PanopticFactory.sol#66) is too similar to PanopticFactory.constructor(address,SemiFungiblePositionManager,IUniswapV3Factory,address,address,bytes32[],uint256[][],Pointer[][])._poolReference (contracts/PanopticFactory.sol#109)
+Variable PanopticFactory.uniswapV3MintCallback(uint256,uint256,bytes).amount0Owed (contracts/PanopticFactory.sol#132) is too similar to PanopticFactory.uniswapV3MintCallback(uint256,uint256,bytes).amount1Owed (contracts/PanopticFactory.sol#133)
+Variable PanopticFactory.deployNewPool(address,address,uint24,uint96,uint256,uint256).collateralTracker0 (contracts/PanopticFactory.sol#205-207) is too similar to PanopticFactory.deployNewPool(address,address,uint24,uint96,uint256,uint256).collateralTracker1 (contracts/PanopticFactory.sol#208-210)
+Variable PanopticPool._getAvailablePremium(uint256,LeftRightUnsigned,LeftRightUnsigned,LeftRightUnsigned,uint256[2]).accumulated0 (contracts/PanopticPool.sol#1732-1733) is too similar to PanopticPool._getAvailablePremium(uint256,LeftRightUnsigned,LeftRightUnsigned,LeftRightUnsigned,uint256[2]).accumulated1 (contracts/PanopticPool.sol#1734-1735)
+Variable PanopticPool.startPool(IUniswapV3Pool,address,address,CollateralTracker,CollateralTracker).collateralTracker0 (contracts/PanopticPool.sol#287) is too similar to PanopticPool.startPool(IUniswapV3Pool,address,address,CollateralTracker,CollateralTracker).collateralTracker1 (contracts/PanopticPool.sol#288)
+Variable PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]).deltaBonus0 (contracts/PanopticPool.sol#1088) is too similar to PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]).deltaBonus1 (contracts/PanopticPool.sol#1089)
+Variable PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]).liquidationBonus0 (contracts/PanopticPool.sol#1043) is too similar to PanopticPool.liquidate(TokenId[],address,LeftRightUnsigned,TokenId[]).liquidationBonus1 (contracts/PanopticPool.sol#1044)
+Variable PanopticPool.optionPositionBalance(address,TokenId).poolUtilization0 (contracts/PanopticPool.sol#360) is too similar to PanopticPool._mintInSFPMAndUpdateCollateral(TokenId,uint128,int24,int24).poolUtilizations (contracts/PanopticPool.sol#662)
+Variable PanopticPool.optionPositionBalance(address,TokenId).poolUtilization0 (contracts/PanopticPool.sol#360) is too similar to PanopticPool.optionPositionBalance(address,TokenId).poolUtilization1 (contracts/PanopticPool.sol#360)
+Variable PanopticPool.optionPositionBalance(address,TokenId).poolUtilization1 (contracts/PanopticPool.sol#360) is too similar to PanopticPool._mintInSFPMAndUpdateCollateral(TokenId,uint128,int24,int24).poolUtilizations (contracts/PanopticPool.sol#662)
+Variable PanopticPool.optionPositionBalance(address,TokenId).poolUtilization0 (contracts/PanopticPool.sol#360) is too similar to PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24).poolUtilizations (contracts/PanopticPool.sol#617-622)
+Variable PanopticPool.optionPositionBalance(address,TokenId).poolUtilization1 (contracts/PanopticPool.sol#360) is too similar to PanopticPool._mintOptions(TokenId[],uint128,uint64,int24,int24).poolUtilizations (contracts/PanopticPool.sol#617-622)
+Variable PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]).positionIdListExercisee (contracts/PanopticPool.sol#1149) is too similar to PanopticPool.forceExercise(address,TokenId[],TokenId[],TokenId[]).positionIdListExercisor (contracts/PanopticPool.sol#1150)
+Variable PanopticPool.settleLongPremium(TokenId[],address,uint256).premiumAccumulator0 (contracts/PanopticPool.sol#1570) is too similar to PanopticPool.settleLongPremium(TokenId[],address,uint256).premiumAccumulator1 (contracts/PanopticPool.sol#1570)
+Variable PanopticPool._addUserOption(TokenId,uint64).premiumAccumulator0 (contracts/PanopticPool.sol#718) is too similar to PanopticPool._addUserOption(TokenId,uint64).premiumAccumulator1 (contracts/PanopticPool.sol#718)
+Variable PanopticPool.settleLongPremium(TokenId[],address,uint256).premiumAccumulator0 (contracts/PanopticPool.sol#1570) is too similar to PanopticPool._addUserOption(TokenId,uint64).premiumAccumulator1 (contracts/PanopticPool.sol#718)
+Variable PanopticPool.settleLongPremium(TokenId[],address,uint256).premiumAccumulator0 (contracts/PanopticPool.sol#1570) is too similar to PanopticPool._getAvailablePremium(uint256,LeftRightUnsigned,LeftRightUnsigned,LeftRightUnsigned,uint256[2]).premiumAccumulators (contracts/PanopticPool.sol#1726)
+Variable PanopticPool._addUserOption(TokenId,uint64).premiumAccumulator0 (contracts/PanopticPool.sol#718) is too similar to PanopticPool.settleLongPremium(TokenId[],address,uint256).premiumAccumulator1 (contracts/PanopticPool.sol#1570)
+Variable PanopticPool._addUserOption(TokenId,uint64).premiumAccumulator0 (contracts/PanopticPool.sol#718) is too similar to PanopticPool._getAvailablePremium(uint256,LeftRightUnsigned,LeftRightUnsigned,LeftRightUnsigned,uint256[2]).premiumAccumulators (contracts/PanopticPool.sol#1726)
+Variable PanopticPool.settleLongPremium(TokenId[],address,uint256).premiumAccumulator1 (contracts/PanopticPool.sol#1570) is too similar to PanopticPool._getAvailablePremium(uint256,LeftRightUnsigned,LeftRightUnsigned,LeftRightUnsigned,uint256[2]).premiumAccumulators (contracts/PanopticPool.sol#1726)
+Variable PanopticPool._addUserOption(TokenId,uint64).premiumAccumulator1 (contracts/PanopticPool.sol#718) is too similar to PanopticPool._getAvailablePremium(uint256,LeftRightUnsigned,LeftRightUnsigned,LeftRightUnsigned,uint256[2]).premiumAccumulators (contracts/PanopticPool.sol#1726)
+Variable PanopticPool.s_collateralToken0 (contracts/PanopticPool.sol#221) is too similar to PanopticPool.s_collateralToken1 (contracts/PanopticPool.sol#223)
+Variable PanopticPool._payCommissionAndWriteData(TokenId,uint128,LeftRightSigned).utilization0 (contracts/PanopticPool.sol#683-688) is too similar to PanopticPool._payCommissionAndWriteData(TokenId,uint128,LeftRightSigned).utilization1 (contracts/PanopticPool.sol#689-694)
+Variable SemiFungiblePositionManager.uniswapV3SwapCallback(int256,int256,bytes).amount0Delta (contracts/SemiFungiblePositionManager.sol#438) is too similar to SemiFungiblePositionManager.uniswapV3SwapCallback(int256,int256,bytes).amount1Delta (contracts/SemiFungiblePositionManager.sol#439)
+Variable SemiFungiblePositionManager.uniswapV3MintCallback(uint256,uint256,bytes).amount0Owed (contracts/SemiFungiblePositionManager.sol#405) is too similar to SemiFungiblePositionManager.uniswapV3MintCallback(uint256,uint256,bytes).amount1Owed (contracts/SemiFungiblePositionManager.sol#406)
+Variable SemiFungiblePositionManager._getFeesBase(IUniswapV3Pool,uint128,LiquidityChunk,bool).feeGrowthInside0LastX128 (contracts/SemiFungiblePositionManager.sol#1139) is too similar to SemiFungiblePositionManager._getFeesBase(IUniswapV3Pool,uint128,LiquidityChunk,bool).feeGrowthInside1LastX128 (contracts/SemiFungiblePositionManager.sol#1139)
+Variable SemiFungiblePositionManager._getPremiaDeltas(LeftRightUnsigned,LeftRightUnsigned).premium0X64_base (contracts/SemiFungiblePositionManager.sol#1333) is too similar to SemiFungiblePositionManager._getPremiaDeltas(LeftRightUnsigned,LeftRightUnsigned).premium1X64_base (contracts/SemiFungiblePositionManager.sol#1334)
+Variable SemiFungiblePositionManager._getPremiaDeltas(LeftRightUnsigned,LeftRightUnsigned).premium0X64_owed (contracts/SemiFungiblePositionManager.sol#1354) is too similar to SemiFungiblePositionManager._getPremiaDeltas(LeftRightUnsigned,LeftRightUnsigned).premium1X64_owed (contracts/SemiFungiblePositionManager.sol#1355)
+Variable SemiFungiblePositionManager._getPremiaDeltas(LeftRightUnsigned,LeftRightUnsigned).premium0X64_gross (contracts/SemiFungiblePositionManager.sol#1375) is too similar to SemiFungiblePositionManager._getPremiaDeltas(LeftRightUnsigned,LeftRightUnsigned).premium1X64_gross (contracts/SemiFungiblePositionManager.sol#1376)
+Variable SemiFungiblePositionManager._collectAndWritePositionData(LiquidityChunk,IUniswapV3Pool,LeftRightUnsigned,bytes32,LeftRightSigned,uint256).receivedAmount0 (contracts/SemiFungiblePositionManager.sol#1275) is too similar to SemiFungiblePositionManager._collectAndWritePositionData(LiquidityChunk,IUniswapV3Pool,LeftRightUnsigned,bytes32,LeftRightSigned,uint256).receivedAmount1 (contracts/SemiFungiblePositionManager.sol#1275)
+Variable Constants.MAX_V3POOL_SQRT_RATIO (contracts/libraries/Constants.sol#21-22) is too similar to Constants.MIN_V3POOL_SQRT_RATIO (contracts/libraries/Constants.sol#18)
+Variable FeesCalc.calculateAMMSwapFees(IUniswapV3Pool,int24,int24,int24,uint128).ammFeesPerLiqToken0X128 (contracts/libraries/FeesCalc.sol#107) is too similar to FeesCalc.calculateAMMSwapFees(IUniswapV3Pool,int24,int24,int24,uint128).ammFeesPerLiqToken1X128 (contracts/libraries/FeesCalc.sol#108)
+Variable FeesCalc._getAMMSwapFeesPerLiquidityCollected(IUniswapV3Pool,int24,int24,int24).feeGrowthInside0X128 (contracts/libraries/FeesCalc.sol#135) is too similar to FeesCalc._getAMMSwapFeesPerLiquidityCollected(IUniswapV3Pool,int24,int24,int24).feeGrowthInside1X128 (contracts/libraries/FeesCalc.sol#135)
+Variable PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).collateral0 (contracts/libraries/PanopticMath.sol#779) is too similar to PanopticMath.getRefundAmounts(address,LeftRightSigned,int24,CollateralTracker,CollateralTracker).collateral1 (contracts/libraries/PanopticMath.sol#929)
+Variable PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).collateral0 (contracts/libraries/PanopticMath.sol#779) is too similar to PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).collateral1 (contracts/libraries/PanopticMath.sol#780)
+Variable PanopticMath.getRefundAmounts(address,LeftRightSigned,int24,CollateralTracker,CollateralTracker).collateral0 (contracts/libraries/PanopticMath.sol#928) is too similar to PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).collateral1 (contracts/libraries/PanopticMath.sol#780)
+Variable PanopticMath.getRefundAmounts(address,LeftRightSigned,int24,CollateralTracker,CollateralTracker).collateral0 (contracts/libraries/PanopticMath.sol#928) is too similar to PanopticMath.getRefundAmounts(address,LeftRightSigned,int24,CollateralTracker,CollateralTracker).collateral1 (contracts/libraries/PanopticMath.sol#929)
+Variable PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).collateralDelta0 (contracts/libraries/PanopticMath.sol#797) is too similar to PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).collateralDelta1 (contracts/libraries/PanopticMath.sol#798)
+Variable PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).protocolLoss0 (contracts/libraries/PanopticMath.sol#832) is too similar to PanopticMath.haircutPremia(address,TokenId[],LeftRightSigned[4][],LeftRightSigned,CollateralTracker,CollateralTracker,uint160,mapping(bytes32 => LeftRightUnsigned)).protocolLoss1 (contracts/libraries/PanopticMath.sol#808)
+Variable LiquidityChunkLibrary.CLEAR_TL_MASK (contracts/types/LiquidityChunk.sol#54-55) is too similar to LiquidityChunkLibrary.CLEAR_TU_MASK (contracts/types/LiquidityChunk.sol#58-59)
+Variable TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._optionRatio (contracts/types/TokenId.sol#339) is too similar to TokenIdLibrary.flipToBurnToken(TokenId).optionRatios (contracts/types/TokenId.sol#371)
+Variable TokenIdLibrary.addOptionRatio(TokenId,uint256,uint256)._optionRatio (contracts/types/TokenId.sol#223) is too similar to TokenIdLibrary.countLegs(TokenId).optionRatios (contracts/types/TokenId.sol#434)
+Variable TokenIdLibrary.addOptionRatio(TokenId,uint256,uint256)._optionRatio (contracts/types/TokenId.sol#223) is too similar to TokenIdLibrary.flipToBurnToken(TokenId).optionRatios (contracts/types/TokenId.sol#371)
+Variable TokenIdLibrary.addLeg(TokenId,uint256,uint256,uint256,uint256,uint256,uint256,int24,int24)._optionRatio (contracts/types/TokenId.sol#339) is too similar to TokenIdLibrary.countLegs(TokenId).optionRatios (contracts/types/TokenId.sol#434)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#variable-names-too-similar
+INFO:Detectors:
+PanopticPool.startPool(IUniswapV3Pool,address,address,CollateralTracker,CollateralTracker) (contracts/PanopticPool.sol#283-319) uses literals with too many digits:
+	- s_miniMedian = (uint256(block.timestamp) << 216) + (uint256(0xF590A6F276170D89E9F276170D89E9F276170D89E9000000000000)) + (uint256(uint24(currentTick)) << 24) + (uint256(uint24(currentTick))) (contracts/PanopticPool.sol#300-306)
+Constants.slitherConstructorConstantVariables() (contracts/libraries/Constants.sol#7-23) uses literals with too many digits:
+	- FP96 = 0x1000000000000000000000000 (contracts/libraries/Constants.sol#9)
+Math.mostSignificantNibble(uint160) (contracts/libraries/Math.sol#91-117) uses literals with too many digits:
+	- x >= 0x100000000000000000000000000000000 (contracts/libraries/Math.sol#93)
+Math.mostSignificantNibble(uint160) (contracts/libraries/Math.sol#91-117) uses literals with too many digits:
+	- x >= 0x10000000000000000 (contracts/libraries/Math.sol#97)
+Math.mostSignificantNibble(uint160) (contracts/libraries/Math.sol#91-117) uses literals with too many digits:
+	- x >= 0x100000000 (contracts/libraries/Math.sol#101)
+Math.getSqrtRatioAtTick(int24) (contracts/libraries/Math.sol#128-181) uses literals with too many digits:
+	- sqrtR = 0x100000000000000000000000000000000 (contracts/libraries/Math.sol#133-135)
+Math.mulDiv64(uint256,uint256) (contracts/libraries/Math.sol#458-515) uses literals with too many digits:
+	- remainder = mulmod(uint256,uint256,uint256)(a,b,0x10000000000000000) (contracts/libraries/Math.sol#494)
+Math.mulDiv96(uint256,uint256) (contracts/libraries/Math.sol#521-578) uses literals with too many digits:
+	- remainder = mulmod(uint256,uint256,uint256)(a,b,0x1000000000000000000000000) (contracts/libraries/Math.sol#557)
+Math.mulDiv128(uint256,uint256) (contracts/libraries/Math.sol#598-655) uses literals with too many digits:
+	- remainder = mulmod(uint256,uint256,uint256)(a,b,0x100000000000000000000000000000000) (contracts/libraries/Math.sol#634)
+Math.mulDiv192(uint256,uint256) (contracts/libraries/Math.sol#675-732) uses literals with too many digits:
+	- remainder = mulmod(uint256,uint256,uint256)(a,b,0x1000000000000000000000000000000000000000000000000) (contracts/libraries/Math.sol#711)
+PanopticMath.slitherConstructorConstantVariables() (contracts/libraries/PanopticMath.sol#21-974) uses literals with too many digits:
+	- TICKSPACING_MASK = 0xFFFF000000000000 (contracts/libraries/PanopticMath.sol#28)
+SafeTransferLib.safeTransferFrom(address,address,address,uint256) (contracts/libraries/SafeTransferLib.sol#21-46) uses literals with too many digits:
+	- mstore(uint256,uint256)(p_safeTransferFrom_asm_0,0x23b872dd00000000000000000000000000000000000000000000000000000000) (contracts/libraries/SafeTransferLib.sol#29)
+SafeTransferLib.safeTransfer(address,address,uint256) (contracts/libraries/SafeTransferLib.sol#52-76) uses literals with too many digits:
+	- mstore(uint256,uint256)(p_safeTransfer_asm_0,0xa9059cbb00000000000000000000000000000000000000000000000000000000) (contracts/libraries/SafeTransferLib.sol#60)
+LeftRightLibrary.slitherConstructorConstantVariables() (contracts/types/LeftRight.sol#17-301) uses literals with too many digits:
+	- LEFT_HALF_BIT_MASK = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000 (contracts/types/LeftRight.sol#21-22)
+LeftRightLibrary.slitherConstructorConstantVariables() (contracts/types/LeftRight.sol#17-301) uses literals with too many digits:
+	- LEFT_HALF_BIT_MASK_INT = int256(uint256(0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000)) (contracts/types/LeftRight.sol#25-26)
+LiquidityChunkLibrary.slitherConstructorConstantVariables() (contracts/types/LiquidityChunk.sol#52-194) uses literals with too many digits:
+	- CLEAR_TU_MASK = 0xFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF (contracts/types/LiquidityChunk.sol#58-59)
+TokenIdLibrary.clearLeg(TokenId,uint256) (contracts/types/TokenId.sol#464-491) uses literals with too many digits:
+	- TokenId.wrap(TokenId.unwrap(self) & 0xFFFFFFFFFFFF_FFFFFFFFFFFF_FFFFFFFFFFFF_000000000000_FFFFFFFFFFFFFFFF) (contracts/types/TokenId.sol#466-470)
+TokenIdLibrary.clearLeg(TokenId,uint256) (contracts/types/TokenId.sol#464-491) uses literals with too many digits:
+	- TokenId.wrap(TokenId.unwrap(self) & 0xFFFFFFFFFFFF_FFFFFFFFFFFF_000000000000_FFFFFFFFFFFF_FFFFFFFFFFFFFFFF) (contracts/types/TokenId.sol#472-476)
+TokenIdLibrary.clearLeg(TokenId,uint256) (contracts/types/TokenId.sol#464-491) uses literals with too many digits:
+	- TokenId.wrap(TokenId.unwrap(self) & 0xFFFFFFFFFFFF_000000000000_FFFFFFFFFFFF_FFFFFFFFFFFF_FFFFFFFFFFFFFFFF) (contracts/types/TokenId.sol#478-482)
+TokenIdLibrary.clearLeg(TokenId,uint256) (contracts/types/TokenId.sol#464-491) uses literals with too many digits:
+	- TokenId.wrap(TokenId.unwrap(self) & 0x000000000000_FFFFFFFFFFFF_FFFFFFFFFFFF_FFFFFFFFFFFF_FFFFFFFFFFFFFFFF) (contracts/types/TokenId.sol#484-488)
+TokenIdLibrary.slitherConstructorConstantVariables() (contracts/types/TokenId.sol#60-600) uses literals with too many digits:
+	- LONG_MASK = 0x100_000000000100_000000000100_000000000100_0000000000000000 (contracts/types/TokenId.sol#62-63)
+TokenIdLibrary.slitherConstructorConstantVariables() (contracts/types/TokenId.sol#60-600) uses literals with too many digits:
+	- CLEAR_POOLID_MASK = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF_0000000000000000 (contracts/types/TokenId.sol#66-67)
+TokenIdLibrary.slitherConstructorConstantVariables() (contracts/types/TokenId.sol#60-600) uses literals with too many digits:
+	- OPTION_RATIO_MASK = 0x0000000000FE_0000000000FE_0000000000FE_0000000000FE_0000000000000000 (contracts/types/TokenId.sol#70-71)
+TokenIdLibrary.slitherConstructorConstantVariables() (contracts/types/TokenId.sol#60-600) uses literals with too many digits:
+	- CHUNK_MASK = 0xFFFFFFFFF200_FFFFFFFFF200_FFFFFFFFF200_FFFFFFFFF200_0000000000000000 (contracts/types/TokenId.sol#74-75)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+INFO:Detectors:
+Math.MAX_UINT256 (contracts/libraries/Math.sol#15) is never used in Math (contracts/libraries/Math.sol#13-782)
+PanopticMath.MAX_UINT256 (contracts/libraries/PanopticMath.sol#25) is never used in PanopticMath (contracts/libraries/PanopticMath.sol#21-974)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable
+INFO:Slither:. analyzed (46 contracts with 94 detectors), 272 result(s) found
