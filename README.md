@@ -161,6 +161,8 @@ Panoptic has been presented at conferences and was conceived with the first Pano
 
 ### Files in scope
 
+🛑 All the contracts below except  [contracts/base/FactoryNFT.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/base/FactoryNFT.sol), [contracts/base/MetadataStore.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/base/MetadataStore.sol) were audited in [Panoptic April's audit](https://code4rena.com/audits/2024-04-panoptic#). Here is a [diff](https://github.com/code-423n4/2024-06-panoptic/commit/f0a90ac2fbb16718337a6c5f50616c1442c770f1) of the changes.
+
 |                      File                      | Logic Contracts | Interfaces | SLOC |
 |:----------------------------------------------:|:---------------:|:----------:|:----:|
 | [contracts/CollateralTracker.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/CollateralTracker.sol)               | 1               | ****       | 785  |
