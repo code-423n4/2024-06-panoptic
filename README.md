@@ -163,27 +163,26 @@ Panoptic has been presented at conferences and was conceived with the first Pano
 
 |                      File                      | Logic Contracts | Interfaces | SLOC |
 |:----------------------------------------------:|:---------------:|:----------:|:----:|
-| [contracts/CollateralTracker.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/CollateralTracker.sol)               | 1               | ****       | 792  |
-| [contracts/PanopticFactory.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/PanopticFactory.sol)                 | 1               | ****       | 249  |
-| [contracts/PanopticPool.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/PanopticPool.sol)                    | 1               | ****       | 1162 |
-| [contracts/SemiFungiblePositionManager.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/SemiFungiblePositionManager.sol)     | 1               | ****       | 724  |
+| [contracts/CollateralTracker.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/CollateralTracker.sol)               | 1               | ****       | 785  |
+| [contracts/PanopticFactory.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/PanopticFactory.sol)                 | 1               | ****       | 216  |
+| [contracts/PanopticPool.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/PanopticPool.sol)                    | 1               | ****       | 1144 |
+| [contracts/SemiFungiblePositionManager.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/SemiFungiblePositionManager.sol)     | 1               | ****       | 722  |
 | [contracts/libraries/CallbackLib.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/CallbackLib.sol)           | 1               | ****       | 22   |
 | [contracts/libraries/Constants.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/Constants.sol)             | 1               | ****       | 9    |
 | [contracts/libraries/Errors.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/Errors.sol)                | 1               | ****       | 35   |
 | [contracts/libraries/FeesCalc.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/FeesCalc.sol)              | 1               | ****       | 86   |
-| [contracts/libraries/InteractionHelper.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/InteractionHelper.sol)     | 1               | ****       | 72   |
+| [contracts/libraries/InteractionHelper.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/InteractionHelper.sol)     | 1               | ****       | 57   |
 | [contracts/libraries/Math.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/Math.sol)                  | 1               | ****       | 417  |
-| [contracts/libraries/PanopticMath.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/PanopticMath.sol)          | 1               | ****       | 573  |
+| [contracts/libraries/PanopticMath.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/PanopticMath.sol)          | 1               | ****       | 582  |
 | [contracts/libraries/SafeTransferLib.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/SafeTransferLib.sol)       | 1               | ****       | 33   |
-| [contracts/multicall/Multicall.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/multicall/Multicall.sol)             | 1               | ****       | 18   |
+| [contracts/base/Multicall.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/base/Multicall.sol)             | 1               | ****       | 18   |
 | [contracts/tokens/ERC1155Minimal.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/ERC1155Minimal.sol)           | 1               | ****       | 115  |
 | [contracts/tokens/ERC20Minimal.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/ERC20Minimal.sol)             | 1               | ****       | 52   |
-| [contracts/tokens/interfaces/IDonorNFT.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/interfaces/IDonorNFT.sol) | ****            | 1          | 4    |
 | [contracts/tokens/interfaces/IERC20Partial.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/interfaces/IERC20Partial.sol) | ****            | 1          | 6    |
 | [contracts/types/LeftRight.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/types/LeftRight.sol)                 | 1               | ****       | 156  |
 | [contracts/types/LiquidityChunk.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/types/LiquidityChunk.sol)            | 1               | ****       | 91   |
 | [contracts/types/TokenId.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/types/TokenId.sol)                   | 1               | ****       | 305  |
-| Totals                                         | 18              | 1          | 4921 |
+| Totals                                         | 19              | 1          | 4851 |
 
 ### Files out of scope
 

@@ -79,11 +79,11 @@
 | [GAS-1](#GAS-1) | `a = a + b` is more gas effective than `a += b` for state variables (excluding arrays and mappings) | 41 |
 | [GAS-2](#GAS-2) | Use assembly to check for `address(0)` | 6 |
 | [GAS-3](#GAS-3) | Using bools for storage incurs overhead | 12 |
-| [GAS-4](#GAS-4) | Cache array length outside of loop | 7 |
+| [GAS-4](#GAS-4) | Cache array length outside of loop | 8 |
 | [GAS-5](#GAS-5) | State variables should be cached in stack variables rather than re-reading them from storage | 1 |
 | [GAS-6](#GAS-6) | Use calldata instead of memory for function arguments that do not get mutated | 5 |
-| [GAS-7](#GAS-7) | For Operations that will not overflow, you could use unchecked | 682 |
-| [GAS-8](#GAS-8) | Avoid contract existence checks by using low level calls | 4 |
+| [GAS-7](#GAS-7) | For Operations that will not overflow, you could use unchecked | 684 |
+| [GAS-8](#GAS-8) | Avoid contract existence checks by using low level calls | 5 |
 | [GAS-9](#GAS-9) | Stack variable used as a cheaper cache for a state variable is only used once | 2 |
 | [GAS-10](#GAS-10) | State variables only set in the constructor should be declared `immutable` | 14 |
 | [GAS-11](#GAS-11) | Functions guaranteed to revert when called by normal users can be marked `payable` | 3 |
@@ -353,7 +353,7 @@ File: contracts/tokens/ERC1155Minimal.sol
 
 If not cached, the solidity compiler will always read the length of the array during each iteration. That is, if it is a storage array, this is an extra sload operation (100 additional extra gas for each iteration except for the first) and if it is a memory array, this is an extra mload operation (3 additional gas for each iteration except for the first).
 
-*Instances (7)*:
+*Instances (8)*:
 
 ```solidity
 File: contracts/PanopticPool.sol
@@ -372,6 +372,15 @@ File: contracts/SemiFungiblePositionManager.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/SemiFungiblePositionManager.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+14:         for (uint256 i = 0; i < data.length; ) {
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/FeesCalc.sol
@@ -464,7 +473,7 @@ File: contracts/libraries/PanopticMath.sol
 
 ### <a name="GAS-7"></a>[GAS-7] For Operations that will not overflow, you could use unchecked
 
-*Instances (682)*:
+*Instances (684)*:
 
 ```solidity
 File: contracts/CollateralTracker.sol
@@ -1141,6 +1150,17 @@ File: contracts/SemiFungiblePositionManager.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/SemiFungiblePositionManager.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+25:                 assembly ("memory-safe") {
+
+33:                 ++i;
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/CallbackLib.sol
@@ -1946,7 +1966,7 @@ File: contracts/types/TokenId.sol
 
 Prior to 0.8.10 the compiler inserted extra code, including `EXTCODESIZE` (**100 gas**), to check for contract existence for external function calls. In more recent solidity versions, the compiler will not insert these checks if the external call has a return value. Similar behavior can be achieved in earlier versions by using low-level calls, since low level calls never check for contract existence
 
-*Instances (4)*:
+*Instances (5)*:
 
 ```solidity
 File: contracts/PanopticPool.sol
@@ -1958,6 +1978,15 @@ File: contracts/PanopticPool.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/PanopticPool.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+15:             (bool success, bytes memory result) = address(this).delegatecall(data[i]);
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/PanopticMath.sol
@@ -2748,12 +2777,12 @@ File: contracts/PanopticFactory.sol
 | [NC-1](#NC-1) | Missing checks for `address(0)` when assigning values to address state variables | 5 |
 | [NC-2](#NC-2) | Array indices should be referenced via `enum`s rather than via numeric literals | 24 |
 | [NC-3](#NC-3) | Use `string.concat()` or `bytes.concat()` instead of `abi.encodePacked` | 14 |
-| [NC-4](#NC-4) | `constant`s should be defined rather than using magic numbers | 199 |
+| [NC-4](#NC-4) | `constant`s should be defined rather than using magic numbers | 200 |
 | [NC-5](#NC-5) | Control structures do not follow the Solidity Style Guide | 144 |
 | [NC-6](#NC-6) | Unused `error` definition | 32 |
 | [NC-7](#NC-7) | Events that mark critical parameter changes should contain both the old and the new value | 2 |
 | [NC-8](#NC-8) | Function ordering does not follow the Solidity style guide | 5 |
-| [NC-9](#NC-9) | Functions should not be longer than 50 lines | 117 |
+| [NC-9](#NC-9) | Functions should not be longer than 50 lines | 118 |
 | [NC-10](#NC-10) | Change int to int256 | 10 |
 | [NC-11](#NC-11) | Lack of checks in setters | 2 |
 | [NC-12](#NC-12) | Lines are too long | 1 |
@@ -2772,8 +2801,8 @@ File: contracts/PanopticFactory.sol
 | [NC-25](#NC-25) | Internal and private variables and functions names should begin with an underscore | 130 |
 | [NC-26](#NC-26) | Event is missing `indexed` fields | 12 |
 | [NC-27](#NC-27) | Constants should be defined rather than using magic numbers | 30 |
-| [NC-28](#NC-28) | `public` functions not called by the contract should be declared `external` instead | 7 |
-| [NC-29](#NC-29) | Variables need not be initialized to zero | 30 |
+| [NC-28](#NC-28) | `public` functions not called by the contract should be declared `external` instead | 8 |
+| [NC-29](#NC-29) | Variables need not be initialized to zero | 31 |
 
 ### <a name="NC-1"></a>[NC-1] Missing checks for `address(0)` when assigning values to address state variables
 
@@ -2944,7 +2973,7 @@ File: contracts/libraries/PanopticMath.sol
 
 Even [assembly](https://github.com/code-423n4/2022-05-opensea-seaport/blob/9d7ce4d08bf3c3010304a0476a785c70c0e90ae7/contracts/lib/TokenTransferrer.sol#L35-L39) can benefit from using readable constants instead of hex/numeric literals
 
-*Instances (199)*:
+*Instances (200)*:
 
 ```solidity
 File: contracts/CollateralTracker.sol
@@ -3097,6 +3126,15 @@ File: contracts/SemiFungiblePositionManager.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/SemiFungiblePositionManager.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+26:                     revert(add(result, 32), mload(result))
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/Constants.sol
@@ -4323,7 +4361,7 @@ File: contracts/libraries/PanopticMath.sol
 
 Overly complex code can make understanding functionality more difficult, try to further modularize your code to ensure readability
 
-*Instances (117)*:
+*Instances (118)*:
 
 ```solidity
 File: contracts/CollateralTracker.sol
@@ -4428,6 +4466,15 @@ File: contracts/SemiFungiblePositionManager.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/SemiFungiblePositionManager.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+12:     function multicall(bytes[] calldata data) public payable returns (bytes[] memory results) {
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/InteractionHelper.sol
@@ -7569,7 +7616,7 @@ File: contracts/types/TokenId.sol
 
 ### <a name="NC-28"></a>[NC-28] `public` functions not called by the contract should be declared `external` instead
 
-*Instances (7)*:
+*Instances (8)*:
 
 ```solidity
 File: contracts/CollateralTracker.sol
@@ -7588,6 +7635,15 @@ File: contracts/PanopticPool.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/PanopticPool.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+12:     function multicall(bytes[] calldata data) public payable returns (bytes[] memory results) {
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/FeesCalc.sol
@@ -7624,7 +7680,7 @@ File: contracts/tokens/ERC20Minimal.sol
 
 The default value for variables is zero, so initializing them to zero is superfluous.
 
-*Instances (30)*:
+*Instances (31)*:
 
 ```solidity
 File: contracts/CollateralTracker.sol
@@ -7676,6 +7732,15 @@ File: contracts/SemiFungiblePositionManager.sol
 ```
 
 [Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/SemiFungiblePositionManager.sol)
+
+```solidity
+File: contracts/base/Multicall.sol
+
+14:         for (uint256 i = 0; i < data.length; ) {
+
+```
+
+[Link to code](https://github.com/code-423n4/2024-06-panoptic/blob/main/contracts/base/Multicall.sol)
 
 ```solidity
 File: contracts/libraries/FeesCalc.sol
