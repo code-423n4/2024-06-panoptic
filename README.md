@@ -1,6 +1,6 @@
 # Panoptic audit details
 
-- Total Prize Pool: $25000 in USDC
+- Total Prize Pool: $25,000 in USDC
   - HM awards: $21,500 in USDC
   - Judge awards: $1,800 in USDC
   - Validator awards: $1,200 in USDC
