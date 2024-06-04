@@ -176,13 +176,15 @@ Panoptic has been presented at conferences and was conceived with the first Pano
 | [contracts/libraries/PanopticMath.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/PanopticMath.sol)          | 1               | ****       | 582  |
 | [contracts/libraries/SafeTransferLib.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/libraries/SafeTransferLib.sol)       | 1               | ****       | 33   |
 | [contracts/base/Multicall.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/base/Multicall.sol)             | 1               | ****       | 18   |
+| [contracts/base/FactoryNFT.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/base/FactoryNFT.sol)             | 1               | ****       | 252   |
+| [contracts/base/MetadataStore.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/base/MetadataStore.sol)             | 1               | ****       | 16   |
 | [contracts/tokens/ERC1155Minimal.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/ERC1155Minimal.sol)           | 1               | ****       | 115  |
 | [contracts/tokens/ERC20Minimal.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/ERC20Minimal.sol)             | 1               | ****       | 52   |
 | [contracts/tokens/interfaces/IERC20Partial.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/tokens/interfaces/IERC20Partial.sol) | ****            | 1          | 6    |
 | [contracts/types/LeftRight.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/types/LeftRight.sol)                 | 1               | ****       | 156  |
 | [contracts/types/LiquidityChunk.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/types/LiquidityChunk.sol)            | 1               | ****       | 91   |
 | [contracts/types/TokenId.sol](https://github.com/code-423n4/2024-06-panoptic/tree/main/contracts/types/TokenId.sol)                   | 1               | ****       | 305  |
-| Totals                                         | 19              | 1          | 4851 |
+| Totals                                         | 21              | 1          | 5119 |
 
 ### Files out of scope
 

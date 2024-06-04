@@ -11,6 +11,8 @@
 ./contracts/libraries/PanopticMath.sol
 ./contracts/libraries/SafeTransferLib.sol
 ./contracts/base/Multicall.sol
+./contracts/base/FactoryNFT.sol
+./contracts/base/MetadataStore.sol.sol
 ./contracts/tokens/ERC1155Minimal.sol
 ./contracts/tokens/ERC20Minimal.sol
 ./contracts/tokens/interfaces/IERC20Partial.sol
