@@ -1,0 +1,343 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q2-2024 / panoptic-jun04
+==============================================================
+
+[06/03/2024 20:51] knownfactc4_29311
+👋 Hello and welcome to the audit channel for the $25,000 in USDC **Panoptic** audit!
+
+📆 Audit opens 06/04/2024 20:00(20:00 UTC) and runs through 06/10/2024 20:00 (20:00 UTC) (6 days).
+
+Please give a warm welcome to the Panoptic team, particularly @dyed | Panoptic, who will be available for questions either here in the channel or via a PRIVATE thread in the Eastern timezone. 
+
+🤖 **Documentation bot assistance:** For general questions about the codebase, give our documentation bot a try, by tagging `@Docs Wolf` in any thread (private or public) and asking your question. The bot will make its best attempt to answer based on the codebase and documentation, and link you to relevant resources.  
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/audits/2024-06-panoptic
+
+
+[06/04/2024 20:02] C4 (pinned)
+**Automated Findings / Publicly Known Issues**
+
+Reminder: all [Automated Findings / Publicly Known Issues](https://github.com/code-423n4/2024-06-panoptic?tab=readme-ov-file#automated-findings--publicly-known-issues) are out of scope and ineligible for awards.
+
+{Embed}
+https://github.com/code-423n4/2024-06-panoptic?tab=readme-ov-file
+GitHub - code-423n4/2024-06-panoptic
+Contribute to code-423n4/2024-06-panoptic development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q2-2024 - panoptic-jun04 [1246161103382380627].txt_Files/121d8fc8-d3a4-4557-b133-ca5b1526001f-03F79
+
+
+[06/04/2024 20:10] thebrittfactor
+Pinned a message.
+
+
+[06/04/2024 21:04] mansa11
+Is the report from the last audit available?
+
+
+[06/05/2024 05:14] xterminate69
+5k lines in scope and only 6 days??
+
+
+[06/05/2024 05:15] xterminate69
+@dyed | Panoptic
+
+
+[06/05/2024 05:20] 0xstalin
+I think this is more like a mitigation review of the last audit, but, with the rules of a public contest 👀
+
+{Reactions}
+➕ 💯 
+
+[06/05/2024 08:29] xterminate69
+wow
+
+
+[06/05/2024 12:32] dyedm1
+Linked in contest README: https://gist.github.com/dyedm1/49389c9e94754a5df213d410609eb3cd
+
+{Embed}
+https://gist.github.com/dyedm1/49389c9e94754a5df213d410609eb3cd
+C4 2024-04
+C4 2024-04. GitHub Gist: instantly share code, notes, and snippets.
+Code4rena - ARCHIVE-Q2-2024 - panoptic-jun04 [1246161103382380627].txt_Files/gist-og-image-54fd7dc0713e-84C3B.png
+
+
+[06/05/2024 12:35] dyedm1
+Yes, this is a diff audit/mit review, so the new SLOC count is only a few hundred
+
+{Reactions}
+✅ 
+
+[06/05/2024 12:40] mansa11
+What if new bugs that were missed in the first review are found, Will they be in scope?
+
+
+[06/05/2024 13:15] kartoonjoy
+This still operates as a open audit.
+
+
+[06/05/2024 16:03] nfmelendez
+Hi there is very difficult to audit the nft factory because it doesn’t have any metadata
+
+
+[06/05/2024 16:03] nfmelendez
+Right noe the svg is always empty
+
+
+[06/05/2024 16:50] jayeshshukla.
+/// @notice Stores a sorted set of 8 price observations used to compute the internal median oracle price.
+    // The data for the last 8 interactions is stored as such:
+    // LAST UPDATED BLOCK TIMESTAMP (40 bits)
+    // [BLOCK.TIMESTAMP]
+    // (00000000000000000000000000000000) // dynamic
+    //
+    // ORDERING of tick indices least --> greatest (24 bits)
+    // The value of the bit codon ([#]) is a pointer to a tick index in the tick array.
+    // The position of the bit codon from most to least significant is the ordering of the
+    // tick index it points to from least to greatest.
+    //
+    // [7] [5] [3] [1] [0] [2] [4] [6]
+    // 111 101 011 001 000 010 100 110
+    //
+    // [Constants.MIN_V3POOL_TICK-1] [7]
+    // 111100100111011000010111
+    //
+    // [Constants.MAX_V3POOL_TICK+1] [0]
+    // 000011011000100111101001
+    //
+    // [Constants.MIN_V3POOL_TICK-1] [6]
+    // 111100100111011000010111
+    //
+    // [Constants.MAX_V3POOL_TICK+1] [1]
+    // 000011011000100111101001
+    //
+    // [Constants.MIN_V3POOL_TICK-1] [5]
+    // 111100100111011000010111
+    //
+    // [Constants.MAX_V3POOL_TICK+1] [2]
+    // 000011011000100111101001
+    //
+    // [CURRENT TICK] [4]
+    // (000000000000000000000000) // dynamic
+    //
+    // [CURRENT TICK] [3]
+    // (000000000000000000000000) // dynamic
+    uint256 internal s_miniMedian;
+
+Its not clear what this information states @dyed | Panoptic 
+
+can you give a little information about it
+
+
+[06/05/2024 16:51] dyedm1
+Will paste this from the contest rules:
+
+"There are three new contracts introduced by the diff: FactoryNFT.sol (inherited), MetadataStore.sol (inherited) and Pointer.sol (a library). NONE of the functionality in these contracts or the factory's NFT/ERC721 implementation/issuance is in scope. However, the contracts themselves must technically be included in the scope because of their usage in the core contracts, so issues involving any existing functionality being compromised due to the introduction of those contracts are valid."
+
+{Reactions}
+👍 
+
+[06/05/2024 16:53] dyedm1
+`s_miniMedian` is packed data containing 1) a queue with 8 slots for price observations 2) a mapping of the sorted indices of that queue and 3) the timestamp of the last observation. The format is:
+`[40-bit timestamp][3x8=24-bit sorted queue indices by tick][24x8=192-bit queue with 8 Uniswap ticks]`
+
+{Reactions}
+👍 
+
+[06/07/2024 11:31] no.one7777
+`Could not instantiate forked environment with fork url: YOUR_RPC_URL` i got this message when i try to ran tests
+
+
+[06/07/2024 13:44] samuselderg
+i havent seen the audit setup for this one, but have you replaced YOUR_RPC_URL with your RPC url? if its forking the state of the chain at a specific height you'll likely also need that RPC's node to be an archive node
+
+
+[06/07/2024 13:45] samuselderg
+checked the readme and that indeed seems to be the case, please read the following: https://github.com/code-423n4/2024-06-panoptic?tab=readme-ov-file#running-tests it says (works best with archive node) but in my experience if its forking at anything other than the current block it will absolutely need an archive node
+
+
+[06/07/2024 13:46] no.one7777
+i did it all steps
+
+
+[06/07/2024 21:00] 0xstalin
+you need to update the variable `eth_rpc_url = ""`  inside the `foundry.toml`
+
+{Reactions}
+👍 
+
+[06/09/2024 04:41] mahi_vasisth
+Hi guys I want to ask questions related to protocol audit . who is there to answer my questions on thread
+
+
+[06/09/2024 05:02] 0xstalin
+you can ping @dyed | Panoptic
+
+
+[06/09/2024 05:02] mahi_vasisth
+Ok Thanks sir
+
+
+[06/09/2024 05:51] shibi_kishore101
+@dyed | Panoptic I have DMed you regarding my doubts, kindly reply as soon as possible
+
+{Reactions}
+👍 
+
+[06/10/2024 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺Wardens The **Panoptic** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Feel free to ping a Civics-Admin if you have questions along the way!
+
+{Reactions}
+🫡 
+
+[06/20/2024 22:42] liveactionllamac4
+**Update on results and awards**
+
+This competition has produced unusual results: 
+
+- No valid HM findings were submitted.
+- There was no QA pool, so only a handful of QA reports were submitted.
+
+Normally, in such a case, no awards would be distributed. 
+
+Nevertheless, the Panoptic sponsor recognized the value in certain QA findings and has kindly offered to establish a QA pool as a token of appreciation. The award announcement will be coming soon to distribute the $860 QA pool amongst the top-ranking QA findings.
+
+
+[06/20/2024 22:44] liveactionllamac4
+🤑 🎉  Awards for **Panoptic**:
+
+$339.47 USDC » @0xbug 
+$339.47 USDC » @sammy 
+$181.05 USDC » @Bauchibred
+
+🏁 Findings summary
+--------------------------------------—
+High risk findings: 0
+Med risk findings: 0
+QA reports: 3 (Best: sammy & bigtone)
+
+Awards will be distributed on Polygon within the next week. Congratulations all!  💸 💸 💸
+
+*Note: If you participated in this audit and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+
+[06/20/2024 22:46] sammytm
+```
+Ranks for QA and Gas reports
+These guidelines apply to all audits starting on or after April 30, 2024.
+
+After post-judging QA is complete, the Judge and Validators vote to select the top 3 QA reports and Gas reports. (In the case of a tie vote, there may be a 4th place report.)
+
+The 1st, 2nd, and 3rd place winners are awarded using a curve model that will be documented here ASAP.
+
+Tie votes are handled as follows:
+
+3-way tie for 1st place: the QA/Gas pool is split evenly between the three 1st place winners (no 2nd or 3rd place reports).
+
+2-way tie for 1st place: the awards for 1st and 2nd place are combined and split evenly among the tied reports (no 2nd place report).
+
+If 2 or more reports tie for 2nd place, the awards for 2nd and 3rd place are combined and split evenly among the tied reports (no 3rd place report).
+
+If 2 or more reports tie for 3rd place, the 3rd place awards are split evenly among the tied reports.
+
+Satisfactory reports not among the winning reports will not be awarded -- but will count towards wardens' accuracy scores.
+
+In the unlikely event that zero high- or medium-risk vulnerabilities are found, the HM award pool will be divided among all satisfactory QA reports based on the QA Report curve, unless otherwise stated in the audit repo.
+```
+
+{Reactions}
+👀 (3) 
+
+[06/20/2024 22:47] sammytm
+Shouldn't the HM pool be distributed among the QA reports according to the docs? This wasn't mentioned in the repo
+
+{Reactions}
+👀 (2) 
+
+[06/20/2024 23:33] 0xnevi
+There is no QA pool, and originally all QA findings won't be considered anyways, so i guess this rule was overriden
+
+{Reactions}
+👎 
+
+[06/21/2024 09:14] cloudellie
+That's correct -- the key phrase is "unless otherwise stated in the audit repo."
+
+In this case, there was no QA pool listed in the `readme`, as the original intent was to not award any QA findings. As such, most wardens chose not to submit QA reports, so there was a very small pool of QA submissions as you might expect.
+
+It's an extraordinary case, to be sure. As such, it's quantifiably different from the situation for which the cited rule was written.
+
+{Reactions}
+👎 
+
+[06/21/2024 11:41] illilli000
+where do the funds from the HM pool go? back to sponsor?
+
+
+[06/21/2024 11:44] cloudellie
+We're discussing that with them; it has not yet been decided.
+
+
+[06/21/2024 11:45] cloudellie
+Most likely options are to refund, or credit towards a future C4 audit. It's not going to the org if that's what you're asking. 🙂
+
+{Reactions}
+😁 
+
+[06/21/2024 12:10] 0xfox_
+This case where there are no HM vulnerabilities and also no QA for the contest should probably be added to the documentation.
+
+
+[06/21/2024 13:31] sammytm
+This is quite unprofessional, please fix your documentation. Nowhere was it mentioned that the pool would randomly be shrunk if no HM were found. IMO the wardens that invested their time into securing the protocol deserve the pool if not otherwise mentioned.
+
+
+[06/21/2024 13:31] sammytm
+In the past, the pool has always been distributed among QAs if no HMs found.
+
+
+[06/21/2024 13:49] cloudellie
+There was no QA pool. Anyone who submitted should have expected $0. Instead, the sponsor has generously opted to award the top QA reports. 
+
+As a competitive platform we are perennially encountering novel edge cases that require adaptive decision making. 
+
+Calling my colleagues unprofessional is not going to change the situation.
+
+
+[06/21/2024 13:53] cloudellie
+We will certainly update the docs, as we always do when new edge cases emerge that need to be accounted for.
+
+
+[06/21/2024 13:56] sammytm
+I'm not trying to change the situation. I'm only giving you constructive remarks about the documentation so that this doesn't happen again in the future.
+Have a nice day.
+
+{Reactions}
+👍 (2) 🫡 
+
+[06/21/2024 16:41] dadekuma
+> In the unlikely event that zero high- or medium-risk vulnerabilities are found, the HM award pool will be divided among all satisfactory QA reports based on the QA Report curve, unless otherwise stated in the audit repo.
+
+I believe the wording is correct. None of the QA reports are satisfactory, because there are no allocated funds for the QA pool. This is consistent with previous audits that do not have a gas pool for example, where all submitted gas reports were labeled with insufficient quality. Consequently, the HM award pool will not be divided among any of the reports.
+
+{Reactions}
+👍 
+
+[06/27/2024 22:57] itsmetechjay
+ℹ️ This channel is pending archive.   As a result, any private threads will be permanently deleted on Friday, 05 July 2024>. Please make sure to grab anything you might need before then.
+
+
+[07/05/2024 21:47] itsmetechjay
+ℹ️ Reminder: this channel will be deleted after 24 hours.
+
+
+==============================================================
+Exported 45 message(s)
+==============================================================
